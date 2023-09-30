@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_iedc/widgets/event_card.dart';
+import 'package:user_iedc/widgets/pop-up.dart';
 
 void main() {
   runApp(const MyApp());
@@ -41,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Color.fromARGB(255, 245, 230, 230),
       body: Center(
-        child: const EventCard(),
+        child: const Home(),
       ),
     );
   }
