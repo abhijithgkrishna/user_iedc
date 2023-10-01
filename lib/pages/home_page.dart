@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_iedc/pages/categories_page.dart';
-import 'package:user_iedc/widgets/event_card.dart';
 
 import '../widgets/app_bar.dart';
 import '../widgets/category_tile.dart';
@@ -55,68 +54,21 @@ class HomePage extends StatelessWidget {
                 route: CategoriesPage(),
               ),
             ),
-            CategoryScrollWidget(
+            const CategoryScrollWidget(
               category: 'Panel Discussion',
             ),
-            Container(
-              child: CategoryTitleWidget(
-                title: 'Events',
-                route: CategoriesPage(),
-              ),
+            const CategoryTitleWidget(
+              title: 'Events',
+              route: CategoriesPage(),
             ),
-            ScrollingCardWidget(
+            const ScrollingCardWidget(
               big: false,
+            ),
+            SizedBox(
+              height: 30,
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class CardWidget extends StatelessWidget {
-  final double width;
-  final double height;
-  const CardWidget({
-    super.key,
-    required this.width,
-    required this.height,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: Container(
-        color: Colors.yellow,
-        child: SizedBox(
-          width: width,
-          height: height,
-        ),
-      ),
-    );
-  }
-}
-
-class TextWidget extends StatelessWidget {
-  final String title;
-  final double size;
-  final Color textcolor;
-  const TextWidget({
-    super.key,
-    required this.title,
-    required this.size,
-    required this.textcolor,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      title,
-      style: TextStyle(
-        color: textcolor,
-        fontSize: size,
-        fontWeight: FontWeight.w900,
       ),
     );
   }

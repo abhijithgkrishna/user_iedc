@@ -31,7 +31,7 @@ class AppBarWidget extends StatelessWidget {
                     TextSpan(
                         text: "What's Happening",
                         style: GoogleFonts.dmSans(
-                          color: Color(0xFF2057E3),
+                          color: const Color(0xFF2057E3),
                           fontWeight: FontWeight.bold,
                           fontSize: 21,
                         ))
@@ -42,7 +42,7 @@ class AppBarWidget extends StatelessWidget {
             Row(
               children: [
                 SvgPicture.asset('assets/bell.svg'),
-                SizedBox(
+                const SizedBox(
                   width: 23,
                 ),
                 SvgPicture.asset('assets/avatar.svg'),

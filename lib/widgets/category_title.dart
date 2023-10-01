@@ -24,7 +24,7 @@ class CategoryTitleWidget extends StatelessWidget {
               style: GoogleFonts.dmSans(
                 fontWeight: FontWeight.w500,
                 fontSize: 20,
-                color: Color(0xff2057E3),
+                color: const Color(0xff2057E3),
               ),
             ),
           ),
@@ -38,10 +38,10 @@ class CategoryTitleWidget extends StatelessWidget {
                     style: GoogleFonts.dmSans(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
-                      color: Color(0xff2057E3),
+                      color: const Color(0xff2057E3),
                     ),
                   )),
-              Icon(
+              const Icon(
                 Icons.navigate_next,
                 color: Color(0xff2057E3),
               )

@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:user_iedc/pages/home_page.dart';
 
 class CategoriesPage extends StatelessWidget {
   const CategoriesPage({super.key});
@@ -13,7 +12,7 @@ class CategoriesPage extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: ListView(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -26,8 +25,8 @@ class CategoriesPage extends StatelessWidget {
                       fontSize: 25, fontWeight: FontWeight.w500),
                 ),
               ),
-              CategoryGridWidget(),
-              SizedBox(
+              const CategoryGridWidget(),
+              const SizedBox(
                 height: 20,
               ),
               Padding(
@@ -40,10 +39,10 @@ class CategoriesPage extends StatelessWidget {
                       fontSize: 25, fontWeight: FontWeight.w500),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
-              Row(
+              const Row(
                 children: [
                   VenueWidget(
                     location: 'DJ HALL',
@@ -53,7 +52,7 @@ class CategoriesPage extends StatelessWidget {
                   )
                 ],
               ),
-              Row(
+              const Row(
                 children: [
                   VenueWidget(
                     location: 'CEETA HALL',
