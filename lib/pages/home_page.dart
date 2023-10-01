@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:user_iedc/pages/categories_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -23,15 +24,22 @@ class HomePage extends StatelessWidget {
             child: TextWidget(
               title: 'Ongoing Events',
               size: 28,
+              textcolor: Colors.blue,
             ),
           ),
           ScrollingCardWidget(
             width: 250,
             height: 250,
           ),
-          CategoryTitleWidget(title: 'Categories'),
+          CategoryTitleWidget(
+            title: 'Categories',
+            route: CategoriesPage(),
+          ),
           CategoryScrollWidget(),
-          CategoryTitleWidget(title: 'Events'),
+          CategoryTitleWidget(
+            title: 'Events',
+            route: CategoriesPage(),
+          ),
           ScrollingCardWidget(
             width: 200,
             height: 200,
@@ -84,9 +92,11 @@ class CategoryScrollWidget extends StatelessWidget {
 
 class CategoryTitleWidget extends StatelessWidget {
   final String title;
+  final Widget route;
   const CategoryTitleWidget({
     required this.title,
     super.key,
+    required this.route,
   });
 
   @override
@@ -99,12 +109,18 @@ class CategoryTitleWidget extends StatelessWidget {
           TextWidget(
             title: title,
             size: 28,
+            textcolor: Colors.blue,
           ),
-          const Row(
+          Row(
             children: [
-              TextWidget(
-                title: 'view all',
-                size: 20,
+              InkWell(
+                onTap: () => Navigator.of(context)
+                    .push(MaterialPageRoute(builder: (context) => route)),
+                child: TextWidget(
+                  title: 'view all',
+                  size: 20,
+                  textcolor: Colors.blue,
+                ),
               ),
               Icon(
                 Icons.navigate_next,
@@ -228,6 +244,7 @@ class AppBarWidget extends StatelessWidget {
               TextWidget(
                 title: "What's Happening",
                 size: 28,
+                textcolor: Colors.blue,
               ),
             ],
           ),
@@ -252,10 +269,12 @@ class AppBarWidget extends StatelessWidget {
 class TextWidget extends StatelessWidget {
   final String title;
   final double size;
+  final Color textcolor;
   const TextWidget({
     super.key,
     required this.title,
     required this.size,
+    required this.textcolor,
   });
 
   @override
@@ -263,7 +282,7 @@ class TextWidget extends StatelessWidget {
     return Text(
       title,
       style: TextStyle(
-        color: Colors.blue,
+        color: textcolor,
         fontSize: size,
         fontWeight: FontWeight.w900,
       ),
