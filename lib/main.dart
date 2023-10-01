@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:user_iedc/pages/EventLister.dart';
+import 'package:user_iedc/pages/Home_Page.dart';
+import 'package:user_iedc/widgets/event-categories.dart';
 import 'package:user_iedc/widgets/event_card.dart';
 import 'package:user_iedc/widgets/pop-up.dart';
 
@@ -15,8 +18,8 @@ class MyApp extends StatelessWidget {
       title: 'User IEDC',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-        useMaterial3: true,
+      
+        
       ),
       home: const MyHomePage(title: 'Home Page for my app'),
     );
@@ -42,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Color.fromARGB(255, 245, 230, 230),
       body: Center(
-        child: const Home(),
+        child: const HomePage(),
       ),
     );
   }
