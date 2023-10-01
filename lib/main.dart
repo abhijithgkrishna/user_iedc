@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:user_iedc/pages/EventLister.dart';
 import 'package:user_iedc/pages/Home_Page.dart';
 import 'package:user_iedc/widgets/event-categories.dart';
+import 'package:user_iedc/pages/home_page.dart';
 import 'package:user_iedc/widgets/event_card.dart';
 import 'package:user_iedc/widgets/pop-up.dart';
 
@@ -21,19 +22,8 @@ class MyApp extends StatelessWidget {
       
         
       ),
-      home: const MyHomePage(title: 'Home Page for my app'),
-    );
-  }
-}
+      home: const HomePage(),
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key, required this.title});
-
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
 
 class _MyHomePageState extends State<MyHomePage> {
   @override
@@ -47,6 +37,7 @@ class _MyHomePageState extends State<MyHomePage> {
       body: Center(
         child: const CategoriesEvent(),
       ),
+
     );
   }
 }
