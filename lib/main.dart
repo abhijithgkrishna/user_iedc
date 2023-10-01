@@ -45,7 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       ),
       backgroundColor: Color.fromARGB(255, 245, 230, 230),
       body: Center(
-        child: const HomePage(),
+        child: const CategoriesEvent(),
       ),
     );
   }
