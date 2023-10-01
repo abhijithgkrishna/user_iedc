@@ -1,6 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:user_iedc/pages/categories_page.dart';
+import 'package:user_iedc/widgets/event_card.dart';
+
+import '../widgets/app_bar.dart';
+import '../widgets/category_tile.dart';
+import '../widgets/category_title.dart';
+import '../widgets/search_bar.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -8,6 +14,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xFFE9E9E9),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: Container(
@@ -16,119 +23,52 @@ class HomePage extends StatelessWidget {
           child: const AppBarWidget(),
         ),
       ),
-      body: ListView(
-        children: const [
-          SearchWidget(),
-          Padding(
-            padding: EdgeInsets.all(8.0),
-            child: TextWidget(
-              title: 'Ongoing Events',
-              size: 28,
-              textcolor: Colors.blue,
-            ),
-          ),
-          ScrollingCardWidget(
-            width: 250,
-            height: 250,
-          ),
-          CategoryTitleWidget(
-            title: 'Categories',
-            route: CategoriesPage(),
-          ),
-          CategoryScrollWidget(),
-          CategoryTitleWidget(
-            title: 'Events',
-            route: CategoriesPage(),
-          ),
-          ScrollingCardWidget(
-            width: 200,
-            height: 200,
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class CategoryScrollWidget extends StatelessWidget {
-  const CategoryScrollWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: SizedBox(
-        height: 50,
-        child: ListView.separated(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (ctx, index) => Container(
-            decoration: const BoxDecoration(
-                color: Color.fromARGB(77, 206, 202, 202),
-                borderRadius: BorderRadius.all(Radius.elliptical(50, 50))),
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.settings,
-                    size: 16,
-                  ),
-                  Text('Workshops'),
-                ],
-              ),
-            ),
-          ),
-          separatorBuilder: (ctx, index) => const SizedBox(
-            width: 10,
-          ),
-          itemCount: 10,
-        ),
-      ),
-    );
-  }
-}
-
-class CategoryTitleWidget extends StatelessWidget {
-  final String title;
-  final Widget route;
-  const CategoryTitleWidget({
-    required this.title,
-    super.key,
-    required this.route,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          TextWidget(
-            title: title,
-            size: 28,
-            textcolor: Colors.blue,
-          ),
-          Row(
-            children: [
-              InkWell(
-                onTap: () => Navigator.of(context)
-                    .push(MaterialPageRoute(builder: (context) => route)),
-                child: TextWidget(
-                  title: 'view all',
-                  size: 20,
-                  textcolor: Colors.blue,
+      body: SafeArea(
+        child: ListView(
+          children: [
+            const SearchWidget(),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Padding(
+                padding: const EdgeInsets.only(
+                  left: 16,
+                  top: 16,
+                  bottom: 10,
+                ),
+                child: Text(
+                  'Ongoing Events :',
+                  style: GoogleFonts.dmSans(
+                      fontSize: 20,
+                      fontWeight: FontWeight.w600,
+                      color: const Color(0xFF2057E3)),
                 ),
               ),
-              Icon(
-                Icons.navigate_next,
-                color: Colors.blue,
-              )
-            ],
-          ),
-        ],
+            ),
+            const ScrollingCardWidget(
+              width: 340,
+              height: 340,
+            ),
+            const SizedBox(
+              height: 1,
+            ),
+            const Padding(
+              padding: EdgeInsets.only(top: 17),
+              child: CategoryTitleWidget(
+                title: 'Categories:',
+                route: CategoriesPage(),
+              ),
+            ),
+            CategoryScrollWidget(),
+            CategoryTitleWidget(
+              title: 'Events',
+              route: CategoriesPage(),
+            ),
+            ScrollingCardWidget(
+              width: 200,
+              height: 200,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -148,13 +88,16 @@ class ScrollingCardWidget extends StatelessWidget {
     return SizedBox(
       height: height,
       child: ListView.separated(
+        padding: const EdgeInsets.only(
+          left: 20,
+          right: 20,
+        ),
         scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx, index) => CardWidget(
-          width: width,
-          height: height,
+        itemBuilder: (ctx, index) => EventCard(
+          big: true,
         ),
         separatorBuilder: (ctx, index) => const SizedBox(
-          width: 5,
+          width: 8,
         ),
         itemCount: 10,
       ),
@@ -181,86 +124,6 @@ class CardWidget extends StatelessWidget {
           width: width,
           height: height,
         ),
-      ),
-    );
-  }
-}
-
-class SearchWidget extends StatelessWidget {
-  const SearchWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: CupertinoSearchTextField(
-        backgroundColor: Colors.grey.withOpacity(0.5),
-        prefixIcon: const Icon(
-          CupertinoIcons.search,
-          color: Colors.grey,
-        ),
-        suffixIcon: const Icon(
-          CupertinoIcons.xmark_circle_fill,
-          color: Colors.grey,
-        ),
-        style: const TextStyle(
-          color: Colors.white,
-        ),
-      ),
-    );
-  }
-}
-
-class AppBarWidget extends StatelessWidget {
-  const AppBarWidget({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(top: 50),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                width: 10,
-              ),
-              Text(
-                'Track',
-                style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 28,
-                  fontWeight: FontWeight.w900,
-                ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              TextWidget(
-                title: "What's Happening",
-                size: 28,
-                textcolor: Colors.blue,
-              ),
-            ],
-          ),
-          Row(
-            children: [
-              Icon(Icons.notifications_outlined),
-              SizedBox(
-                width: 10,
-              ),
-              Icon(Icons.person),
-              SizedBox(
-                width: 10,
-              ),
-            ],
-          ),
-        ],
       ),
     );
   }

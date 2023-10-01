@@ -2,16 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class EventCard extends StatelessWidget {
-  const EventCard({super.key});
+  final bool big;
+
+  const EventCard({
+    super.key,
+    required this.big,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 341,
-      width: 339,
+      height: big ? 340 : 240,
+      width: big ? 340 : 240,
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(30),
+        boxShadow: const [
+          BoxShadow(
+            color: Colors.grey,
+            offset: Offset(0.0, 1.0), //(x,y)
+            blurRadius: 2.0,
+          ),
+        ],
       ),
       child: Padding(
         padding: const EdgeInsets.only(
@@ -25,8 +37,8 @@ class EventCard extends StatelessWidget {
             ClipRRect(
               borderRadius: BorderRadius.circular(20),
               child: SizedBox(
-                height: 227,
-                width: 313,
+                height: big ? 227 : 180,
+                width: big ? 313 : 220,
                 child: Image.asset(
                   "assets/image1.png",
                   fit: BoxFit.cover,
