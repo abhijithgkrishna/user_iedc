@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:user_iedc/pages/home_page.dart';
-import 'package:user_iedc/widgets/event_card.dart';
 
 void main() {
   runApp(const MyApp());

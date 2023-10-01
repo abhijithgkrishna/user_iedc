@@ -6,6 +6,7 @@ import 'package:user_iedc/widgets/event_card.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/category_tile.dart';
 import '../widgets/category_title.dart';
+import '../widgets/ongoing_events.dart';
 import '../widgets/search_bar.dart';
 
 class HomePage extends StatelessWidget {
@@ -14,7 +15,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFE9E9E9),
+      backgroundColor: const Color(0xFFE9E9E9),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: Container(
@@ -45,61 +46,29 @@ class HomePage extends StatelessWidget {
               ),
             ),
             const ScrollingCardWidget(
-              width: 340,
-              height: 340,
-            ),
-            const SizedBox(
-              height: 1,
+              big: true,
             ),
             const Padding(
-              padding: EdgeInsets.only(top: 17),
+              padding: EdgeInsets.only(top: 15),
               child: CategoryTitleWidget(
                 title: 'Categories:',
                 route: CategoriesPage(),
               ),
             ),
-            CategoryScrollWidget(),
-            CategoryTitleWidget(
-              title: 'Events',
-              route: CategoriesPage(),
+            CategoryScrollWidget(
+              category: 'Panel Discussion',
+            ),
+            Container(
+              child: CategoryTitleWidget(
+                title: 'Events',
+                route: CategoriesPage(),
+              ),
             ),
             ScrollingCardWidget(
-              width: 200,
-              height: 200,
+              big: false,
             ),
           ],
         ),
-      ),
-    );
-  }
-}
-
-class ScrollingCardWidget extends StatelessWidget {
-  final double width;
-  final double height;
-  const ScrollingCardWidget({
-    super.key,
-    required this.width,
-    required this.height,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: height,
-      child: ListView.separated(
-        padding: const EdgeInsets.only(
-          left: 20,
-          right: 20,
-        ),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx, index) => EventCard(
-          big: true,
-        ),
-        separatorBuilder: (ctx, index) => const SizedBox(
-          width: 8,
-        ),
-        itemCount: 10,
       ),
     );
   }

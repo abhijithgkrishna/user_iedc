@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:user_iedc/pages/home_page.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -11,23 +12,33 @@ class CategoriesPage extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
           child: ListView(
-            children: const [
+            children: [
               SizedBox(
                 height: 20,
               ),
-              TextWidget(
-                title: 'Categories',
-                size: 28,
-                textcolor: Colors.black,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 27,
+                ),
+                child: Text(
+                  'Categories:',
+                  style: GoogleFonts.dmSans(
+                      fontSize: 25, fontWeight: FontWeight.w500),
+                ),
               ),
               CategoryGridWidget(),
               SizedBox(
                 height: 20,
               ),
-              TextWidget(
-                title: 'Venues',
-                size: 28,
-                textcolor: Colors.black,
+              Padding(
+                padding: const EdgeInsets.only(
+                  left: 27,
+                ),
+                child: Text(
+                  'Venues:',
+                  style: GoogleFonts.dmSans(
+                      fontSize: 25, fontWeight: FontWeight.w500),
+                ),
               ),
               SizedBox(
                 height: 15,
@@ -101,36 +112,39 @@ class CategoryGridWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(8.0),
-      child: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: 3,
-        crossAxisSpacing: 20,
-        mainAxisSpacing: 20,
-        children: List.generate(
-          8,
-          (index) => Container(
-            decoration: const BoxDecoration(
-              color: Colors.blue,
-              borderRadius: BorderRadius.all(
-                Radius.elliptical(15, 15),
+      child: Padding(
+        padding: const EdgeInsets.only(left: 22, right: 22),
+        child: GridView.count(
+          shrinkWrap: true,
+          crossAxisCount: 3,
+          crossAxisSpacing: 30,
+          mainAxisSpacing: 30,
+          children: List.generate(
+            8,
+            (index) => Container(
+              height: 110,
+              width: 96,
+              decoration: BoxDecoration(
+                color: Colors.blue,
+                borderRadius: BorderRadius.circular(20),
               ),
-            ),
-            child: const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.settings,
-                  color: Colors.white,
-                ),
-                Text(
-                  'Workshops',
-                  style: TextStyle(color: Colors.white),
-                ),
-                Text(
-                  '3 events',
-                  style: TextStyle(color: Colors.white),
-                )
-              ],
+              child: const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.settings,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    'Workshops',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  Text(
+                    '3 events',
+                    style: TextStyle(color: Colors.white),
+                  )
+                ],
+              ),
             ),
           ),
         ),

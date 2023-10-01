@@ -3,8 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoryScrollWidget extends StatelessWidget {
+  final String category;
   const CategoryScrollWidget({
     super.key,
+    required this.category,
   });
 
   @override
@@ -36,7 +38,7 @@ class CategoryScrollWidget extends StatelessWidget {
                 Padding(
                   padding: const EdgeInsets.only(right: 4),
                   child: Text(
-                    'Workshops',
+                    category,
                     style: GoogleFonts.dmSans(
                       fontSize: 13,
                       fontWeight: FontWeight.w500,
