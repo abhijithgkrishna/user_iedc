@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CategoriesPage extends StatelessWidget {
@@ -7,6 +8,7 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xffe9e9e9),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -17,7 +19,8 @@ class CategoriesPage extends StatelessWidget {
               ),
               Padding(
                 padding: const EdgeInsets.only(
-                  left: 27,
+                  left: 20,
+                  bottom: 18,
                 ),
                 child: Text(
                   'Categories:',
@@ -82,16 +85,20 @@ class VenueWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Container(
-        decoration: const BoxDecoration(
-            color: Color.fromARGB(77, 206, 202, 202),
-            borderRadius: BorderRadius.all(Radius.elliptical(50, 50))),
+        decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(18),
+            boxShadow: const [
+              BoxShadow(
+                  offset: Offset(0, 1), blurRadius: 1, color: Colors.grey),
+            ]),
         child: Padding(
           padding: const EdgeInsets.all(12),
           child: Row(
             children: [
-              const Icon(
-                Icons.location_on_outlined,
-                size: 16,
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: SvgPicture.asset('assets/pin.svg'),
               ),
               Text(location),
             ],
@@ -109,41 +116,46 @@ class CategoryGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: Padding(
-        padding: const EdgeInsets.only(left: 22, right: 22),
-        child: GridView.count(
-          shrinkWrap: true,
-          crossAxisCount: 3,
-          crossAxisSpacing: 30,
-          mainAxisSpacing: 30,
-          children: List.generate(
-            8,
-            (index) => Container(
-              height: 110,
-              width: 96,
-              decoration: BoxDecoration(
-                color: Colors.blue,
+    return GridView.count(
+      shrinkWrap: true,
+      crossAxisCount: 3,
+      children: List.generate(
+        8,
+        (index) => Center(
+          child: Container(
+            height: 110,
+            width: 96,
+            decoration: BoxDecoration(
+                color: Color(0xff2763FF),
                 borderRadius: BorderRadius.circular(20),
-              ),
-              child: const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.settings,
-                    color: Colors.white,
-                  ),
-                  Text(
-                    'Workshops',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    '3 events',
-                    style: TextStyle(color: Colors.white),
-                  )
-                ],
-              ),
+                boxShadow: [
+                  BoxShadow(
+                      color: const Color.fromARGB(68, 0, 0, 0),
+                      offset: Offset(0, 0.5),
+                      blurRadius: 4)
+                ]),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: SvgPicture.asset('assets/gear1.svg'),
+                ),
+                Text(
+                  'Workshops',
+                  style: GoogleFonts.dmSans(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w500,
+                      color: Colors.white),
+                ),
+                Text(
+                  '3 events',
+                  style: GoogleFonts.dmSans(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w400,
+                      color: Colors.white),
+                ),
+              ],
             ),
           ),
         ),
