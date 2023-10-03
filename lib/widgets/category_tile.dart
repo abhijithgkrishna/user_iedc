@@ -12,10 +12,11 @@ class CategoryScrollWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: const EdgeInsets.all(8),
       child: SizedBox(
         height: 30,
         child: ListView.separated(
+          padding: EdgeInsets.only(left: 12, bottom: 2),
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => Container(
             decoration: BoxDecoration(

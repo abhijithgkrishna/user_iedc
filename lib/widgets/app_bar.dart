@@ -12,7 +12,7 @@ class AppBarWidget extends StatelessWidget {
     return Expanded(
       child: Container(
         decoration: const BoxDecoration(
-          color: Color(0xFFE9E9E9),
+          color: Color(0xFFf9f9f9),
         ),
         padding: const EdgeInsets.only(top: 50),
         child: Row(
