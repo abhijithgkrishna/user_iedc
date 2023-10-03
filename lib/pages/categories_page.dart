@@ -8,7 +8,7 @@ class CategoriesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xffe9e9e9),
+      backgroundColor: Color(0xfff9f9f9),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),

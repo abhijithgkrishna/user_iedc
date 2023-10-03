@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,12 +7,12 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-   
         body: Center(
       child: SingleChildScrollView(
         child: Card(
           elevation: 80,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           shadowColor: Colors.white,
           color: Color.fromARGB(255, 255, 255, 255),
           child: SizedBox(
@@ -43,16 +42,18 @@ class Home extends StatelessWidget {
                   //SizedBox
                   Text(
                     'AI In mental health',
-                   style: GoogleFonts.dmSans(color: Color.fromARGB(255, 0, 0, 0),fontWeight: FontWeight.w500,fontSize: 22),//Textstyle
+                    style: GoogleFonts.dmSans(
+                        color: Color.fromARGB(255, 0, 0, 0),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 22), //Textstyle
                   ),
-                const  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      
                       Padding(
                         padding: const EdgeInsets.only(left: 0),
                         child: Text.rich(
@@ -114,7 +115,7 @@ class Home extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left:8.0),
+                        padding: const EdgeInsets.only(left: 8.0),
                         child: Text.rich(
                           TextSpan(
                               text: 'Speaker : ',
@@ -145,7 +146,6 @@ class Home extends StatelessWidget {
                       'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry ',
                       style: GoogleFonts.dmSans(fontWeight: FontWeight.w500),
                     ),
-                    
                   ),
                   SizedBox(
                     height: 50,
@@ -170,15 +170,13 @@ class Home extends StatelessWidget {
                   ),
                   SizedBox(
                     width: 100,
-        
-              
-                  ) 
+                  )
                 ],
-              ), 
-            ), 
-          ), 
+              ),
+            ),
+          ),
         ),
-      ), 
+      ),
     ));
   }
 }
