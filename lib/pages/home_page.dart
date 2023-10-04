@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_iedc/pages/EventLister.dart';
 import 'package:user_iedc/pages/categories_page.dart';
 
 import '../widgets/app_bar.dart';
@@ -47,6 +48,9 @@ class HomePage extends StatelessWidget {
             const ScrollingCardWidget(
               big: true,
             ),
+            SizedBox(
+              height: 10,
+            ),
             const Padding(
               padding: EdgeInsets.only(top: 15),
               child: CategoryTitleWidget(
@@ -59,7 +63,7 @@ class HomePage extends StatelessWidget {
             ),
             const CategoryTitleWidget(
               title: 'Events',
-              route: CategoriesPage(),
+              route: EventList(),
             ),
             const ScrollingCardWidget(
               big: false,

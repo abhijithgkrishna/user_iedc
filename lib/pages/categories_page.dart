@@ -116,13 +116,16 @@ class CategoryGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.count(
-      shrinkWrap: true,
-      crossAxisCount: 3,
-      children: List.generate(
-        8,
-        (index) => Center(
-          child: Container(
+    return Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: GridView.count(
+        shrinkWrap: true,
+        crossAxisCount: 3,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 30,
+        children: List.generate(
+          8,
+          (index) => Container(
             height: 110,
             width: 96,
             decoration: BoxDecoration(

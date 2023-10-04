@@ -11,14 +11,16 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
+        
         decoration: const BoxDecoration(
           color: Color(0xFFf9f9f9),
         ),
         padding: const EdgeInsets.only(top: 50),
         child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 27, right: 55),
+              padding: const EdgeInsets.only(left: 20, right: 55),
               child: Text.rich(
                 TextSpan(
                   text: "Track ",
@@ -41,11 +43,14 @@ class AppBarWidget extends StatelessWidget {
             ),
             Row(
               children: [
-                SvgPicture.asset('assets/bell.svg'),
-                const SizedBox(
-                  width: 23,
-                ),
-                SvgPicture.asset('assets/avatar.svg'),
+                Padding(
+                  padding: const EdgeInsets.only(right:16.0),
+                  child: Icon(
+                    
+                    Icons.person,
+                    size: 30,
+                  ),
+                )
               ],
             ),
           ],

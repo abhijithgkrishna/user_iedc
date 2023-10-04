@@ -11,24 +11,43 @@ class ScrollingCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: big ? 345 : 255,
-      child: ListView.separated(
-        padding: const EdgeInsets.only(
-          left: 20,
-          right: 20,
+    double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+   double cardHeight = screenHeight*0.39;
+    double cardwidth = screenWidth*0.8;
+
+
+    return Column(
+      children: [
+        SizedBox(
+          height: big ? cardHeight : 255,
+         // width: big? cardwidth: 100,
+          child: ListView.separated(
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              bottom: 2
+              ,
+              top:2
+            ),
+            scrollDirection: Axis.horizontal,
+            itemBuilder: (ctx, index) => EventCard(
+              big: big,
+              title: 'AI in mental Health',
+              venue: 'Sargam Stage',
+            ),
+            separatorBuilder: (ctx, index) => const SizedBox(
+              width: 20,
+            
+            ),
+            itemCount: 10,
+          ),
+          
         ),
-        scrollDirection: Axis.horizontal,
-        itemBuilder: (ctx, index) => EventCard(
-          big: big,
-          title: 'AI in mental Health',
-          venue: 'Sargam Stage',
-        ),
-        separatorBuilder: (ctx, index) => const SizedBox(
-          width: 8,
-        ),
-        itemCount: 10,
-      ),
+        
+      ],
     );
+    
   }
 }
