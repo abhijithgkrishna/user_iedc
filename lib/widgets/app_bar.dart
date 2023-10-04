@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_iedc/misc/hero_dialog_route.dart';
+import 'package:user_iedc/widgets/pop-up.dart';
+
+import '../misc/tween_animation.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({
@@ -45,7 +49,21 @@ class AppBarWidget extends StatelessWidget {
                 const SizedBox(
                   width: 23,
                 ),
-                SvgPicture.asset('assets/avatar.svg'),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.of(context).push(HeroDialogRoute(
+                      builder: (context) {
+                        return const Home();
+                      },
+                    ));
+                  },
+                  child: Hero(
+                      tag: 'popUp',
+                      createRectTween: (begin, end) {
+                        return CustomRectTween(begin: begin, end: end);
+                      },
+                      child: SvgPicture.asset('assets/avatar.svg')),
+                ),
               ],
             ),
           ],

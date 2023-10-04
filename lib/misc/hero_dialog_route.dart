@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 class HeroDialogRoute<T> extends PageRoute<T> {
   HeroDialogRoute({
     required WidgetBuilder builder,
-    required RouteSettings settings,
+    RouteSettings? settings,
     bool isFullscreen = false,
   })  : _builder = builder,
-        super(settings: settings, fullscreenDialog: fullscreenDialog);
+        super(settings: settings, fullscreenDialog: isFullscreen);
 
   final WidgetBuilder _builder;
   @override
@@ -38,6 +38,4 @@ class HeroDialogRoute<T> extends PageRoute<T> {
 
   @override
   String get barrierLabel => 'popup';
-
-  }
 }
