@@ -18,7 +18,9 @@ class _EventListState extends State<EventList> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const SizedBox(height: 20,),
+              const SizedBox(
+                height: 20,
+              ),
               Padding(
                 padding: const EdgeInsets.only(left: 15.0),
                 child: Text.rich(TextSpan(
@@ -30,7 +32,9 @@ class _EventListState extends State<EventList> {
                   ),
                 )),
               ),
-              const SizedBox(height: 10,),
+              const SizedBox(
+                height: 10,
+              ),
               Expanded(
                 // Wrap the ListView.builder with Expanded
                 child: ListView.separated(
@@ -42,7 +46,6 @@ class _EventListState extends State<EventList> {
                     return Container(
                       height: 95, // Set the desired height of the ListTile
                       child: ListTile(
-                        
                         title: Row(
                           children: [
                             ClipRRect(

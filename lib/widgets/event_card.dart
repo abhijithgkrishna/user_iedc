@@ -21,7 +21,7 @@ class EventCard extends StatelessWidget {
     double cardHeight = screenHeight*0.75;
     double cardwidth = screenWidth*0.65;
 
-    double cardHeightPhoto = screenHeight*0.245;
+    double cardHeightPhoto = screenHeight*0.259;
     double cardwidthPhoto = screenWidth*0.65;
     return Center(
       child: Container(
@@ -53,12 +53,15 @@ class EventCard extends StatelessWidget {
                 child: SizedBox(
                   height: big ? cardHeightPhoto : 180,
                   width: big ? cardwidthPhoto : 226,
-                  child: Image.asset(
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom:12.0),
+                    child: Image.asset(
+                      
+                      "assets/image1.png",
                     
-                    "assets/image1.png",
-                  
-                    height: 200,
-                    width: 300,
+                      height: 200,
+                      width: 300,
+                    ),
                   ),
                 ),
               ),
