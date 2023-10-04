@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:user_iedc/pages/EventLister.dart';
+import 'package:user_iedc/pages/profile_page.dart';
 import 'package:user_iedc/widgets/event-categories.dart';
 import 'package:user_iedc/pages/home_page.dart';
 
