@@ -4,7 +4,9 @@ import 'package:bloc/bloc.dart';
 import 'package:flutter_sanity/flutter_sanity.dart';
 import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:user_iedc/models/categorymodel/categories.dart';
 import 'package:user_iedc/models/eventmodel/events.dart';
+import 'package:user_iedc/models/venuemodel/venues.dart';
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
 part 'home_state.dart';
@@ -23,6 +25,18 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           .fetch('*[_type == "event"]{_id,event_name,start_time,end_time,speaker,status,category,venue}');
         final List<Events> eventList = (response as List).map((e) {
           return Events.fromJson(e);
+        }).toList();
+
+        final response2 = await sanityClient
+          .fetch('*[_type == "category"]{_id,categoryname}');
+        final List<Categories> categoryList = (response2 as List).map((e) {
+          return Categories.fromJson(e);
+        }).toList();
+
+        final response3 = await sanityClient
+          .fetch('*[_type == "venue"]{_id,venuename}');
+        final List<Venues> venueyList = (response3 as List).map((e) {
+          return Venues.fromJson(e);
         }).toList();
 
       log(response.toString());

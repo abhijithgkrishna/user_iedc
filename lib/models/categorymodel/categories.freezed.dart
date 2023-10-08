@@ -20,6 +20,9 @@ Categories _$CategoriesFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Categories {
+  @JsonKey(name: "_id")
+  String get id => throw _privateConstructorUsedError;
+  @JsonKey(name: "categoryname")
   String get categoryname => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -34,7 +37,9 @@ abstract class $CategoriesCopyWith<$Res> {
           Categories value, $Res Function(Categories) then) =
       _$CategoriesCopyWithImpl<$Res, Categories>;
   @useResult
-  $Res call({String categoryname});
+  $Res call(
+      {@JsonKey(name: "_id") String id,
+      @JsonKey(name: "categoryname") String categoryname});
 }
 
 /// @nodoc
@@ -50,9 +55,14 @@ class _$CategoriesCopyWithImpl<$Res, $Val extends Categories>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? categoryname = null,
   }) {
     return _then(_value.copyWith(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       categoryname: null == categoryname
           ? _value.categoryname
           : categoryname // ignore: cast_nullable_to_non_nullable
@@ -69,7 +79,9 @@ abstract class _$$CategoriesImplCopyWith<$Res>
       __$$CategoriesImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String categoryname});
+  $Res call(
+      {@JsonKey(name: "_id") String id,
+      @JsonKey(name: "categoryname") String categoryname});
 }
 
 /// @nodoc
@@ -83,9 +95,14 @@ class __$$CategoriesImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = null,
     Object? categoryname = null,
   }) {
     return _then(_$CategoriesImpl(
+      id: null == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as String,
       categoryname: null == categoryname
           ? _value.categoryname
           : categoryname // ignore: cast_nullable_to_non_nullable
@@ -97,17 +114,23 @@ class __$$CategoriesImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$CategoriesImpl implements _Categories {
-  const _$CategoriesImpl({required this.categoryname});
+  const _$CategoriesImpl(
+      {@JsonKey(name: "_id") required this.id,
+      @JsonKey(name: "categoryname") required this.categoryname});
 
   factory _$CategoriesImpl.fromJson(Map<String, dynamic> json) =>
       _$$CategoriesImplFromJson(json);
 
   @override
+  @JsonKey(name: "_id")
+  final String id;
+  @override
+  @JsonKey(name: "categoryname")
   final String categoryname;
 
   @override
   String toString() {
-    return 'Categories(categoryname: $categoryname)';
+    return 'Categories(id: $id, categoryname: $categoryname)';
   }
 
   @override
@@ -115,13 +138,14 @@ class _$CategoriesImpl implements _Categories {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$CategoriesImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.categoryname, categoryname) ||
                 other.categoryname == categoryname));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, categoryname);
+  int get hashCode => Object.hash(runtimeType, id, categoryname);
 
   @JsonKey(ignore: true)
   @override
@@ -138,13 +162,19 @@ class _$CategoriesImpl implements _Categories {
 }
 
 abstract class _Categories implements Categories {
-  const factory _Categories({required final String categoryname}) =
+  const factory _Categories(
+          {@JsonKey(name: "_id") required final String id,
+          @JsonKey(name: "categoryname") required final String categoryname}) =
       _$CategoriesImpl;
 
   factory _Categories.fromJson(Map<String, dynamic> json) =
       _$CategoriesImpl.fromJson;
 
   @override
+  @JsonKey(name: "_id")
+  String get id;
+  @override
+  @JsonKey(name: "categoryname")
   String get categoryname;
   @override
   @JsonKey(ignore: true)

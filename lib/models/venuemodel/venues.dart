@@ -6,6 +6,9 @@ part 'venues.freezed.dart';
 @freezed
 class Venues with _$Venues {
   const factory Venues({
+    @JsonKey(name: "_id")
+    required String id,
+    @JsonKey(name: "venuename")
     required String venuename,
   }) = _Venues;
 
