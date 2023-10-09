@@ -27,17 +27,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
           return Events.fromJson(e);
         }).toList();
 
-        final response2 = await sanityClient
-          .fetch('*[_type == "category"]{_id,categoryname}');
-        final List<Categories> categoryList = (response2 as List).map((e) {
-          return Categories.fromJson(e);
-        }).toList();
-
-        final response3 = await sanityClient
-          .fetch('*[_type == "venue"]{_id,venuename}');
-        final List<Venues> venueyList = (response3 as List).map((e) {
-          return Venues.fromJson(e);
-        }).toList();
+        
 
       log(response.toString());
       print(response[0]);

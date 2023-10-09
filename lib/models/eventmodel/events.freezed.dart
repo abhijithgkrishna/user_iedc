@@ -33,9 +33,9 @@ mixin _$Events {
   @JsonKey(name: "status")
   String get status => throw _privateConstructorUsedError;
   @JsonKey(name: "category")
-  Map<String, dynamic> get category => throw _privateConstructorUsedError;
+  String get category => throw _privateConstructorUsedError;
   @JsonKey(name: "venue")
-  Map<String, dynamic> get venue => throw _privateConstructorUsedError;
+  String get venue => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -54,8 +54,8 @@ abstract class $EventsCopyWith<$Res> {
       @JsonKey(name: "end_time") String endtime,
       @JsonKey(name: "speaker") String speaker,
       @JsonKey(name: "status") String status,
-      @JsonKey(name: "category") Map<String, dynamic> category,
-      @JsonKey(name: "venue") Map<String, dynamic> venue});
+      @JsonKey(name: "category") String category,
+      @JsonKey(name: "venue") String venue});
 }
 
 /// @nodoc
@@ -108,11 +108,11 @@ class _$EventsCopyWithImpl<$Res, $Val extends Events>
       category: null == category
           ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       venue: null == venue
           ? _value.venue
           : venue // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
     ) as $Val);
   }
 }
@@ -131,8 +131,8 @@ abstract class _$$EventsImplCopyWith<$Res> implements $EventsCopyWith<$Res> {
       @JsonKey(name: "end_time") String endtime,
       @JsonKey(name: "speaker") String speaker,
       @JsonKey(name: "status") String status,
-      @JsonKey(name: "category") Map<String, dynamic> category,
-      @JsonKey(name: "venue") Map<String, dynamic> venue});
+      @JsonKey(name: "category") String category,
+      @JsonKey(name: "venue") String venue});
 }
 
 /// @nodoc
@@ -181,13 +181,13 @@ class __$$EventsImplCopyWithImpl<$Res>
           : status // ignore: cast_nullable_to_non_nullable
               as String,
       category: null == category
-          ? _value._category
+          ? _value.category
           : category // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
       venue: null == venue
-          ? _value._venue
+          ? _value.venue
           : venue // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>,
+              as String,
     ));
   }
 }
@@ -202,10 +202,8 @@ class _$EventsImpl implements _Events {
       @JsonKey(name: "end_time") required this.endtime,
       @JsonKey(name: "speaker") required this.speaker,
       @JsonKey(name: "status") required this.status,
-      @JsonKey(name: "category") required final Map<String, dynamic> category,
-      @JsonKey(name: "venue") required final Map<String, dynamic> venue})
-      : _category = category,
-        _venue = venue;
+      @JsonKey(name: "category") required this.category,
+      @JsonKey(name: "venue") required this.venue});
 
   factory _$EventsImpl.fromJson(Map<String, dynamic> json) =>
       _$$EventsImplFromJson(json);
@@ -228,23 +226,12 @@ class _$EventsImpl implements _Events {
   @override
   @JsonKey(name: "status")
   final String status;
-  final Map<String, dynamic> _category;
   @override
   @JsonKey(name: "category")
-  Map<String, dynamic> get category {
-    if (_category is EqualUnmodifiableMapView) return _category;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_category);
-  }
-
-  final Map<String, dynamic> _venue;
+  final String category;
   @override
   @JsonKey(name: "venue")
-  Map<String, dynamic> get venue {
-    if (_venue is EqualUnmodifiableMapView) return _venue;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableMapView(_venue);
-  }
+  final String venue;
 
   @override
   String toString() {
@@ -264,22 +251,15 @@ class _$EventsImpl implements _Events {
             (identical(other.endtime, endtime) || other.endtime == endtime) &&
             (identical(other.speaker, speaker) || other.speaker == speaker) &&
             (identical(other.status, status) || other.status == status) &&
-            const DeepCollectionEquality().equals(other._category, _category) &&
-            const DeepCollectionEquality().equals(other._venue, _venue));
+            (identical(other.category, category) ||
+                other.category == category) &&
+            (identical(other.venue, venue) || other.venue == venue));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      eventname,
-      starttime,
-      endtime,
-      speaker,
-      status,
-      const DeepCollectionEquality().hash(_category),
-      const DeepCollectionEquality().hash(_venue));
+  int get hashCode => Object.hash(runtimeType, id, eventname, starttime,
+      endtime, speaker, status, category, venue);
 
   @JsonKey(ignore: true)
   @override
@@ -303,9 +283,8 @@ abstract class _Events implements Events {
       @JsonKey(name: "end_time") required final String endtime,
       @JsonKey(name: "speaker") required final String speaker,
       @JsonKey(name: "status") required final String status,
-      @JsonKey(name: "category") required final Map<String, dynamic> category,
-      @JsonKey(name: "venue")
-      required final Map<String, dynamic> venue}) = _$EventsImpl;
+      @JsonKey(name: "category") required final String category,
+      @JsonKey(name: "venue") required final String venue}) = _$EventsImpl;
 
   factory _Events.fromJson(Map<String, dynamic> json) = _$EventsImpl.fromJson;
 
@@ -329,10 +308,10 @@ abstract class _Events implements Events {
   String get status;
   @override
   @JsonKey(name: "category")
-  Map<String, dynamic> get category;
+  String get category;
   @override
   @JsonKey(name: "venue")
-  Map<String, dynamic> get venue;
+  String get venue;
   @override
   @JsonKey(ignore: true)
   _$$EventsImplCopyWith<_$EventsImpl> get copyWith =>

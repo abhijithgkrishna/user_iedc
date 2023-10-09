@@ -29,7 +29,7 @@ class ScrollingCardWidget extends StatelessWidget {
             itemBuilder: (ctx, index) => EventCard(
               big: big,
               title: state.data[index].eventname,
-              venue: 'Sargam Stage',
+              venue: state.data[index].venue,
             ),
             separatorBuilder: (ctx, index) => const SizedBox(
               width: 8,

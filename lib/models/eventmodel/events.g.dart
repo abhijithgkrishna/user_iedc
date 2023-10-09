@@ -13,8 +13,8 @@ _$EventsImpl _$$EventsImplFromJson(Map<String, dynamic> json) => _$EventsImpl(
       endtime: json['end_time'] as String,
       speaker: json['speaker'] as String,
       status: json['status'] as String,
-      category: json['category'] as Map<String, dynamic>,
-      venue: json['venue'] as Map<String, dynamic>,
+      category: json['category'] as String,
+      venue: json['venue'] as String,
     );
 
 Map<String, dynamic> _$$EventsImplToJson(_$EventsImpl instance) =>
