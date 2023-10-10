@@ -3,14 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 
 class ProfileCard extends StatelessWidget {
-
   const ProfileCard({super.key});
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Card(
-        
         elevation: 50,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         shadowColor: Colors.white,
@@ -23,11 +21,13 @@ class ProfileCard extends StatelessWidget {
                 Container(
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.end,
-                    
                     children: [
-                      IconButton(onPressed: (){
-                        Navigator.pop(context);
-                      },icon: Icon(Icons.close),)
+                      IconButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        icon: Icon(Icons.close),
+                      )
                     ],
                   ),
                 ),
@@ -36,9 +36,11 @@ class ProfileCard extends StatelessWidget {
                   child: SizedBox(
                       height: 195,
                       width: 250,
-                      child: Icon(
-                        Icons.qr_code_2_outlined,
-                        size: 200,
+                      child: Center(
+                        child: QrImageView(
+                          data: '1234567890',
+                          version: QrVersions.auto,
+                        ),
                       )),
                 ), //CircleAvatar
                 const SizedBox(
@@ -82,8 +84,8 @@ class ProfileCard extends StatelessWidget {
                             ]),
                       ),
                     ),
-                     Padding(
-                      padding: const EdgeInsets.only(left: 0,top: 15),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 0, top: 15),
                       child: Text.rich(
                         TextSpan(
                             text: 'Booking ID : ',
@@ -105,9 +107,8 @@ class ProfileCard extends StatelessWidget {
                   ],
                 ),
                 //Text
-               
+
                 //SizedBox
-               
               ],
             ),
           ),
