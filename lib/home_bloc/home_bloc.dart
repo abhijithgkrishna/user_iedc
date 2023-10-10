@@ -1,18 +1,16 @@
-import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
 import 'package:flutter_sanity/flutter_sanity.dart';
-import 'package:meta/meta.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:user_iedc/models/categorymodel/categories.dart';
 import 'package:user_iedc/models/eventmodel/events.dart';
 import 'package:user_iedc/models/venuemodel/venues.dart';
 import 'package:user_iedc/sanity/sanity_config.dart';
+
 part 'home_bloc.freezed.dart';
 part 'home_event.dart';
 part 'home_state.dart';
 
 class HomeBloc extends Bloc<HomeEvent, HomeState> {
+  List<Events> eventList = [];
   HomeBloc() : super(HomeState.initial()) {
     on<_FetchData>((event, emit) async {
       emit(state.copyWith(data: []));
@@ -37,5 +35,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       print(eventList[2]);
       emit(state.copyWith(data: eventList));
     });
+  }
+  List<Events> getEventList() {
+    return eventList;
   }
 }

@@ -1,5 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
 import 'package:user_iedc/data/firebase-config.dart';
 import 'package:user_iedc/data/firebase-test.dart';
 import 'package:user_iedc/firebase_options.dart';
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [BlocProvider(create: ((context) => HomeBloc()))],
       child: MaterialApp(
-        title: 'User IEDC',
+        title: 'IEDC Summit 2023',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
         home: const Splash(),

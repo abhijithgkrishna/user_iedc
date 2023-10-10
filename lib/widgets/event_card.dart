@@ -19,11 +19,15 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String truncatedText =
+        title.length <= 18 ? title : title.substring(0, 18) + '...';
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     double cardHeight = screenHeight * 0.75;
-    double cardwidth = screenWidth * 0.65;
+  // double cardwidth = screenWidth*0.65;
+
 
     double cardHeightPhoto = screenHeight * 0.259;
     double cardwidthPhoto = screenWidth * 0.65;
@@ -59,13 +63,17 @@ class EventCard extends StatelessWidget {
                   height: big ? cardHeightPhoto : 180,
                   width: big ? cardwidthPhoto : 226,
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom: 12.0),
+                    padding: EdgeInsets.only(
+                      bottom: 12.0,
+                      top: big ? 0 : 12,
+                    )   
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(18),
                       child: Image.network(
                         urlFor(SanityImage.fromJson(imgUrl)).size(300, 300).url(),
                         fit: BoxFit.fill,
                       ),
+
                     ),
                   ),
                 ),
@@ -74,13 +82,14 @@ class EventCard extends StatelessWidget {
                 height: 9,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(title,
-                    style: GoogleFonts.dmSans(
-                      fontWeight: FontWeight.w500,
-                      fontSize: big ? 20 : 18,
-                    )),
-              ),
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Center(
+                    child: Text(truncatedText,
+                        style: GoogleFonts.dmSans(
+                          fontWeight: FontWeight.w500,
+                          fontSize: big ? 20 : 18,
+                        )),
+                  )),
               Padding(
                 padding: EdgeInsets.only(left: 12, bottom: big ? 0 : 4),
                 child: Text.rich(
