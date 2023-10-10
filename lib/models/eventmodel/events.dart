@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:user_iedc/models/categorymodel/categories.dart';
-import 'package:user_iedc/models/venuemodel/venues.dart';
 
 part 'events.g.dart';
 part 'events.freezed.dart';

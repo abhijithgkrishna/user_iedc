@@ -1,72 +1,86 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class CategoriesEvent extends StatefulWidget {
-  const CategoriesEvent({super.key});
+import '../home_bloc/home_bloc.dart';
+import '../models/eventmodel/events.dart';
 
-  @override
-  State<CategoriesEvent> createState() => _CategoriesEventState();
-}
+class CategoriesEvent extends StatelessWidget {
+  final String categoryname;
+  final bool isCategory;
+  const CategoriesEvent(
+      {super.key, required this.categoryname, required this.isCategory});
 
-class _CategoriesEventState extends State<CategoriesEvent> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Card(
-          elevation: 80,
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
-          shadowColor: Colors.white,
-          color: Color.fromARGB(255, 255, 255, 255),
-          child: Padding(
-            padding: const EdgeInsets.all(12.0),
-            child: SizedBox(
-              height: 500,
-              width: 400,
-              child: Padding(
-                padding: const EdgeInsets.all(4.0),
-                child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(left:25),
-                        child: Text.rich(
-                          TextSpan(
-                              text: 'Events under ',
-                              style: GoogleFonts.dmSans(
-                                  color: Colors.black,
+    return SingleChildScrollView(
+      child: Card(
+        elevation: 80,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        shadowColor: Colors.white,
+        color: Color.fromARGB(255, 255, 255, 255),
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: SizedBox(
+            height: 500,
+            width: 400,
+            child: Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: Text.rich(
+                        TextSpan(
+                            text: isCategory ? 'Events under ' : 'Events at ',
+                            style: GoogleFonts.dmSans(
+                                color: Colors.black,
+                                fontSize: 19,
+                                fontWeight: FontWeight.w600),
+                            children: [
+                              TextSpan(
+                                text: categoryname,
+                                style: GoogleFonts.dmSans(
+                                  color: Colors.blue,
+                                  fontWeight: FontWeight.w600,
                                   fontSize: 19,
-                                  fontWeight: FontWeight.w600),
-                              children: [
-                                TextSpan(
-                                  text: 'Workshops',
-                                  style: GoogleFonts.dmSans(
-                                    color: Colors.blue,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 19,
-                                  ),
-                                )
-                              ]),
-                        ),
+                                ),
+                              )
+                            ]),
                       ),
-                      SizedBox(height: 20,),
-                      Expanded(
-                        // Wrap the ListView.builder with Expanded
-                        child: ListView.separated(
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    Expanded(
+                      child: BlocBuilder<HomeBloc, HomeState>(
+                          builder: (context, state) {
+                        final eventlist = state.data;
+
+                        List<Events> categoryEvent = [];
+                        if (isCategory) {
+                          for (Events event in eventlist) {
+                            if (event.category == categoryname) {
+                              categoryEvent.add(event);
+                            }
+                          }
+                        } else {
+                          for (Events event in eventlist) {
+                            if (event.venue == categoryname) {
+                              categoryEvent.add(event);
+                            }
+                          }
+                        }
+                        return ListView.separated(
                           separatorBuilder: (context, index) => SizedBox(
                             height: 30,
                           ),
-                          itemCount: 4,
+                          itemCount: categoryEvent.length,
                           itemBuilder: (BuildContext context, int index) {
                             return Container(
                               height:
                                   95, // Set the desired height of the ListTile
                               child: ListTile(
-                                trailing: const Icon(
-                                  Icons.arrow_right_sharp,
-                                  size: 40,
-                                ),
                                 title: Row(
                                   children: [
                                     ClipRRect(
@@ -89,7 +103,8 @@ class _CategoriesEventState extends State<CategoriesEvent> {
                                       children: [
                                         Text.rich(
                                           TextSpan(
-                                            text: 'AI IN MENTAL HEALTH',
+                                            text:
+                                                categoryEvent[index].eventname,
                                             style: GoogleFonts.dmSans(
                                               color: Colors.black,
                                               fontSize: 13,
@@ -110,7 +125,8 @@ class _CategoriesEventState extends State<CategoriesEvent> {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: 'DJ Hall',
+                                                text:
+                                                    categoryEvent[index].venue,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
@@ -130,7 +146,8 @@ class _CategoriesEventState extends State<CategoriesEvent> {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: '9:00 AM - 10:00 AM',
+                                                text: categoryEvent[index]
+                                                    .starttime,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
@@ -150,7 +167,8 @@ class _CategoriesEventState extends State<CategoriesEvent> {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: 'Ongoing',
+                                                text:
+                                                    categoryEvent[index].status,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
@@ -167,10 +185,10 @@ class _CategoriesEventState extends State<CategoriesEvent> {
                               ),
                             );
                           },
-                        ),
-                      )
-                    ]),
-              ),
+                        );
+                      }),
+                    )
+                  ]),
             ),
           ),
         ),

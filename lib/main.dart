@@ -1,9 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:user_iedc/pages/EventLister.dart';
-import 'package:user_iedc/pages/idPage.dart';
-import 'package:user_iedc/widgets/event-categories.dart';
-
 import 'package:user_iedc/home_bloc/home_bloc.dart';
 
 import 'package:user_iedc/pages/home_page.dart';
@@ -21,7 +16,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [BlocProvider(create: ((context) => HomeBloc()))],
       child: MaterialApp(
-        title: 'User IEDC',
+        title: 'IEDC Summit 2023',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
         home: const HomePage(),

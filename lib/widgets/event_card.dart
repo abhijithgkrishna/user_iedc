@@ -15,20 +15,21 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-     double screenWidth = MediaQuery.of(context).size.width;
+    String truncatedText =
+        title.length <= 18 ? title : title.substring(0, 18) + '...';
+    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    double cardHeight = screenHeight*0.75;
-    double cardwidth = screenWidth*0.65;
+    double cardHeight = screenHeight * 0.75;
+    // double cardwidth = screenWidth*0.65;
 
-    double cardHeightPhoto = screenHeight*0.259;
-    double cardwidthPhoto = screenWidth*0.65;
+    double cardHeightPhoto = screenHeight * 0.259;
+    double cardwidthPhoto = screenWidth * 0.65;
 
     return Center(
       child: Container(
         height: big ? cardHeight : 250,
-       // width: big ? 340 : 245,
+        // width: big ? 340 : 245,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),
@@ -56,11 +57,12 @@ class EventCard extends StatelessWidget {
                   height: big ? cardHeightPhoto : 180,
                   width: big ? cardwidthPhoto : 226,
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom:12.0),
+                    padding: EdgeInsets.only(
+                      bottom: 12.0,
+                      top: big ? 0 : 12,
+                    ),
                     child: Image.asset(
-                      
                       "assets/image1.png",
-                    
                       height: 200,
                       width: 300,
                     ),
@@ -71,13 +73,14 @@ class EventCard extends StatelessWidget {
                 height: 9,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8),
-                child: Text(title,
-                    style: GoogleFonts.dmSans(
-                      fontWeight: FontWeight.w500,
-                      fontSize: big ? 20 : 18,
-                    )),
-              ),
+                  padding: const EdgeInsets.only(left: 8),
+                  child: Center(
+                    child: Text(truncatedText,
+                        style: GoogleFonts.dmSans(
+                          fontWeight: FontWeight.w500,
+                          fontSize: big ? 20 : 18,
+                        )),
+                  )),
               Padding(
                 padding: EdgeInsets.only(left: 12, bottom: big ? 0 : 4),
                 child: Text.rich(
