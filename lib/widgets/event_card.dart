@@ -1,34 +1,37 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sanity_image_url/flutter_sanity_image_url.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_iedc/sanity/sanity_config.dart';
 
 class EventCard extends StatelessWidget {
   final bool big;
   final String title;
   final String venue;
+  final Map<String, dynamic> imgUrl;
 
   const EventCard({
     super.key,
     required this.big,
     required this.title,
     required this.venue,
+    required this.imgUrl,
   });
 
   @override
   Widget build(BuildContext context) {
-
-     double screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
-    double cardHeight = screenHeight*0.75;
-    double cardwidth = screenWidth*0.65;
+    double cardHeight = screenHeight * 0.75;
+    double cardwidth = screenWidth * 0.65;
 
-    double cardHeightPhoto = screenHeight*0.259;
-    double cardwidthPhoto = screenWidth*0.65;
+    double cardHeightPhoto = screenHeight * 0.259;
+    double cardwidthPhoto = screenWidth * 0.65;
 
     return Center(
       child: Container(
         height: big ? cardHeight : 250,
-       // width: big ? 340 : 245,
+        // width: big ? 340 : 245,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),
@@ -56,13 +59,13 @@ class EventCard extends StatelessWidget {
                   height: big ? cardHeightPhoto : 180,
                   width: big ? cardwidthPhoto : 226,
                   child: Padding(
-                    padding: const EdgeInsets.only(bottom:12.0),
-                    child: Image.asset(
-                      
-                      "assets/image1.png",
-                    
-                      height: 200,
-                      width: 300,
+                    padding: const EdgeInsets.only(bottom: 12.0),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: Image.network(
+                        urlFor(SanityImage.fromJson(imgUrl)).size(300, 300).url(),
+                        fit: BoxFit.fill,
+                      ),
                     ),
                   ),
                 ),

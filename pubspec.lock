@@ -310,6 +310,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.1.0"
+  flutter_sanity_image_url:
+    dependency: "direct main"
+    description:
+      name: flutter_sanity_image_url
+      sha256: "133f10e3d275fb69422e6ac54cef24f89e79bb921f6b85d131871d39fc11f4e8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   flutter_svg:
     dependency: "direct main"
     description:
