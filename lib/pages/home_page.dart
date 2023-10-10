@@ -1,88 +1,278 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:user_iedc/pages/EventLister.dart';
-import 'package:user_iedc/pages/categories_page.dart';
-import 'package:user_iedc/widgets/pop-up.dart';
-
-import '../widgets/app_bar.dart';
-import '../widgets/category_tile.dart';
-import '../widgets/category_title.dart';
-import '../widgets/ongoing_events.dart';
-import '../widgets/search_bar.dart';
 
 class HomePage extends StatelessWidget {
- 
   const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFf9f9f9),
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(70),
         child: Container(
           color: Colors.white,
           height: 150,
-          child:  AppBarWidget(),
+          child: const AppBarWidget(),
         ),
       ),
-      body: SafeArea(
-        child: ListView(
-          children: [
-            const SearchWidget(),
+      body: Builder(builder: (BuildContext context) {
+        return ListView(
+          children: const [
+            SearchWidget(),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Padding(
-                padding: const EdgeInsets.only(
-                  left: 16,
-                  top: 16,
-                  bottom: 10,
-                ),
-                child: Text(
-                  'Ongoing Events: ',
-                  style: GoogleFonts.dmSans(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w600,
-                      color: const Color(0xFF2057E3)),
-                ),
+              padding: EdgeInsets.all(8.0),
+              child: TextWidget(
+                title: 'Ongoing Events',
+                size: 28,
               ),
             ),
-            InkWell(
-              onTap: (){
-                showDialog(context: context, builder: (context)=>Dialog(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
-                  child:PopUp() ,
-                ));
-              },
-              child: const ScrollingCardWidget(
-                big: true,
-              ),
+            ScrollingCardWidget(
+              width: 250,
+              height: 250,
             ),
-            SizedBox(
-              height: 10,
-            ),
-            const Padding(
-              padding: EdgeInsets.only(top: 15),
-              child: CategoryTitleWidget(
-                title: 'Categories:',
-                route: CategoriesPage(),
-              ),
-            ),
-            const CategoryScrollWidget(
-              category: 'Panel Discussion',
-            ),
-            const CategoryTitleWidget(
-              title: 'Events',
-              route: EventList(),
-            ),
-            const ScrollingCardWidget(
-              big: false,
-            ),
-            SizedBox(
-              height: 30,
+            CategoryTitleWidget(title: 'Categories'),
+            CategoryScrollWidget(),
+            CategoryTitleWidget(title: 'Events'),
+            ScrollingCardWidget(
+              width: 200,
+              height: 200,
             ),
           ],
+        );
+      }),
+    );
+  }
+}
+
+class CategoryScrollWidget extends StatelessWidget {
+  const CategoryScrollWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: SizedBox(
+        height: 50,
+        child: ListView.separated(
+          scrollDirection: Axis.horizontal,
+          itemBuilder: (ctx, index) => Container(
+            decoration: const BoxDecoration(
+                color: Color.fromARGB(77, 206, 202, 202),
+                borderRadius: BorderRadius.all(Radius.elliptical(50, 50))),
+            child: const Padding(
+              padding: EdgeInsets.all(8.0),
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.settings,
+                    size: 16,
+                  ),
+                  Text('Workshops'),
+                ],
+              ),
+            ),
+          ),
+          separatorBuilder: (ctx, index) => const SizedBox(
+            width: 10,
+          ),
+          itemCount: 10,
         ),
+      ),
+    );
+  }
+}
+
+class CategoryTitleWidget extends StatelessWidget {
+  final String title;
+  const CategoryTitleWidget({
+    required this.title,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          TextWidget(
+            title: title,
+            size: 28,
+          ),
+          const Row(
+            children: [
+              TextWidget(
+                title: 'view all',
+                size: 20,
+              ),
+              Icon(
+                Icons.navigate_next,
+                color: Colors.blue,
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ScrollingCardWidget extends StatelessWidget {
+  final double width;
+  final double height;
+  const ScrollingCardWidget({
+    super.key,
+    required this.width,
+    required this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: height,
+      child: ListView.separated(
+        scrollDirection: Axis.horizontal,
+        itemBuilder: (ctx, index) => CardWidget(
+          width: width,
+          height: height,
+        ),
+        separatorBuilder: (ctx, index) => const SizedBox(
+          width: 5,
+        ),
+        itemCount: 10,
+      ),
+    );
+  }
+}
+
+class CardWidget extends StatelessWidget {
+  final double width;
+  final double height;
+  const CardWidget({
+    super.key,
+    required this.width,
+    required this.height,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Container(
+        color: Colors.yellow,
+        child: SizedBox(
+          width: width,
+          height: height,
+        ),
+      ),
+    );
+  }
+}
+
+class SearchWidget extends StatelessWidget {
+  const SearchWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: CupertinoSearchTextField(
+        backgroundColor: Colors.grey.withOpacity(0.5),
+        prefixIcon: const Icon(
+          CupertinoIcons.search,
+          color: Colors.grey,
+        ),
+        suffixIcon: const Icon(
+          CupertinoIcons.xmark_circle_fill,
+          color: Colors.grey,
+        ),
+        style: const TextStyle(
+          color: Colors.white,
+        ),
+      ),
+    );
+  }
+}
+
+class AppBarWidget extends StatelessWidget {
+  const AppBarWidget({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.only(top: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Row(
+            children: [
+              SizedBox(
+                width: 10,
+              ),
+              const Text(
+                'Track',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 28,
+                  fontWeight: FontWeight.w900,
+                ),
+              ),
+              const SizedBox(
+                width: 5,
+              ),
+              const TextWidget(
+                title: "What's Happening",
+                size: 28,
+              ),
+            ],
+          ),
+          Row(
+            children: [
+              IconButton(
+                onPressed: () {
+                  
+                },
+                icon: Icon(Icons.notifications_outlined),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              IconButton(onPressed: () {}, icon: Icon(Icons.person)),
+              SizedBox(
+                width: 10,
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class TextWidget extends StatelessWidget {
+  final String title;
+  final double size;
+  const TextWidget({
+    super.key,
+    required this.title,
+    required this.size,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      title,
+      style: TextStyle(
+        color: Colors.blue,
+        fontSize: size,
+        fontWeight: FontWeight.w900,
       ),
     );
   }
