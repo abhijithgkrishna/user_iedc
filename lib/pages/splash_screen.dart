@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:user_iedc/pages/home_page.dart';
 import 'package:user_iedc/pages/idPage.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({super.key});
+   final String? bookingId ;
+  const Splash({super.key,required this.bookingId});
 
   @override
   State<Splash> createState() => _SplashState();
@@ -15,13 +17,19 @@ class _SplashState extends State<Splash> {
   @override
   void initState() {
     super.initState();
-    
+    sharedPreferencesFunction();
+   
     _navigatetohome();
   }
-
+  sharedPreferencesFunction() async {
+       SharedPreferences prefs = await SharedPreferences.getInstance();
+  var bookingId = prefs.getString("bookingId");
+  }
   _navigatetohome() async {
     await Future.delayed(Duration(milliseconds: 2000));
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>IdEnteringPage()));
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
+     return widget.bookingId == null ? IdEnteringPage() : HomePage();
+    }));
   }
 
   @override

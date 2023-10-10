@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_iedc/pages/idPage.dart';
 
 class ProfileCard extends StatelessWidget {
   const ProfileCard({super.key});
@@ -106,6 +108,23 @@ class ProfileCard extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextButton(
+                    onPressed: () async {
+                      SharedPreferences pref =
+                          await SharedPreferences.getInstance();
+                      pref.remove("bookingId");
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => IdEnteringPage()),
+                        (route) =>
+                            false, // This prevents going back to the previous route
+                      );
+                    },
+                    child: Text('Logout'))
                 //Text
 
                 //SizedBox

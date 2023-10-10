@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_iedc/pages/error_page.dart';
 import 'package:user_iedc/pages/home_page.dart';
 import 'package:user_iedc/widgets/app_bar.dart';
@@ -21,6 +22,8 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
   String data = '';
 
   Future<void> firebaseChecking() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("bookingId",bookingIDController.text);
     setState(() {
       isLoading = true;
     });

@@ -25,15 +25,16 @@ void main() async{
   );
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var bookingId = prefs.getString("bookingId");
+  print('hi');
   print(bookingId);
  
-  runApp( MyApp(data:bookingId!));
+  runApp(MyApp(bookingId: bookingId,));
 }
 
 
 class MyApp extends StatelessWidget {
-  final String data;
-  const MyApp({super.key, required this.data});
+  final String? bookingId ;
+  const MyApp({super.key,required this.bookingId});
 
   @override
   Widget build(BuildContext context) {
@@ -44,7 +45,7 @@ class MyApp extends StatelessWidget {
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
         // ignore: unnecessary_null_comparison
-        home: data == null ? IdEnteringPage():HomePage(),
+        home:Splash(bookingId: bookingId,),
       ),
     );
   }
