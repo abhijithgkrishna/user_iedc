@@ -85,7 +85,7 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
                           text: "Enter Your Booking ID",
                           style: GoogleFonts.dmSans(
                             color: Colors.black,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w500,
                             fontSize: 21,
                           ),
                           children: [
@@ -124,11 +124,14 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   ElevatedButton(
+                    style:ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(31, 237, 233, 233)
+                    ),
                     onPressed: isLoading ? null : firebaseChecking,
-                    child:Text('Login'),
+                    child:Text('Login',style: TextStyle(color: Colors.black87),),
                     
                   ),
                   isLoading

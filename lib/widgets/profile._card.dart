@@ -3,12 +3,71 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_iedc/pages/idPage.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfileCard extends StatelessWidget {
+class ProfileCard extends StatefulWidget {
   const ProfileCard({super.key});
 
   @override
+  State<ProfileCard> createState() => _ProfileCardState();
+}
+
+class _ProfileCardState extends State<ProfileCard> {
+  String name = '';
+  String phoneNumber = '';
+  String? bookingId;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  
+  sharedPreferencesFunction() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bookingId = prefs.getString("bookingId");
+  }
+
+  retrieveData() async {
+    print("---hi--");
+
+    try {
+      print(bookingId);
+      // Replace 'your_collection_name' with your actual collection name
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('attendees')
+          .doc(bookingId) // Replace with the document ID
+          .get();
+      print("-----$documentSnapshot-----");
+      if (documentSnapshot.exists) {
+        // Cast data() to Map<String, dynamic> to access fields
+        final data = documentSnapshot.data() as Map<String, dynamic>;
+        final name = data['name'] ?? "Name not found";
+        final phoneNumber = data['mobile'];
+        setState(() {
+          this.name = name;
+          this.phoneNumber = phoneNumber;
+        });
+      } else {
+        setState(() {
+          name = "Document not found";
+        });
+        return;
+      }
+    } catch (e) {
+      setState(() {
+        name = "Error retrieving document: $e";
+      });
+      return;
+    }
+    return;
+  }
+
+  @override
   Widget build(BuildContext context) {
+    sharedPreferencesFunction();
+    retrieveData();
     return SingleChildScrollView(
       child: Card(
         elevation: 50,
@@ -40,7 +99,7 @@ class ProfileCard extends StatelessWidget {
                       width: 250,
                       child: Center(
                         child: QrImageView(
-                          data: '1234567890',
+                          data: bookingId!,
                           version: QrVersions.auto,
                         ),
                       )),
@@ -53,7 +112,7 @@ class ProfileCard extends StatelessWidget {
                 ),
                 //SizedBox
                 Text(
-                  'Adith Ramdas',
+                  name,
                   style: GoogleFonts.dmSans(
                       color: Color.fromARGB(255, 0, 0, 0),
                       fontWeight: FontWeight.w500,
@@ -70,13 +129,13 @@ class ProfileCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 0),
                       child: Text.rich(
                         TextSpan(
-                            text: 'College : ',
+                            text: 'Phone Number : ',
                             style: GoogleFonts.dmSans(
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w800),
                             children: [
                               TextSpan(
-                                text: 'CET TRIVANDRUM',
+                                text: phoneNumber,
                                 style: GoogleFonts.dmSans(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -96,7 +155,7 @@ class ProfileCard extends StatelessWidget {
                                 fontWeight: FontWeight.w800),
                             children: [
                               TextSpan(
-                                text: 'jddjfsdjd545',
+                                text: bookingId,
                                 style: GoogleFonts.dmSans(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
