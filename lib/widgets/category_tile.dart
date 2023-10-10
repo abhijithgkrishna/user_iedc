@@ -14,7 +14,8 @@ class CategoryScrollWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SizedBox(
-        height: 30,
+        height: 35,
+        
         child: ListView.separated(
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => Container(
@@ -32,7 +33,7 @@ class CategoryScrollWidget extends StatelessWidget {
             child: Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.fromLTRB(4.0, 0, 2, 0),
+                  padding: const EdgeInsets.fromLTRB(4.0, 0, 2, 2),
                   child: SvgPicture.asset('assets/gear.svg'),
                 ),
                 Padding(
@@ -48,8 +49,10 @@ class CategoryScrollWidget extends StatelessWidget {
               ],
             ),
           ),
+          
           separatorBuilder: (context, index) => const SizedBox(
             width: 7,
+            height: 10,
           ),
           itemCount: 10,
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_iedc/pages/EventLister.dart';
 import 'package:user_iedc/pages/categories_page.dart';
+import 'package:user_iedc/widgets/pop-up.dart';
 
 import '../widgets/app_bar.dart';
 import '../widgets/category_tile.dart';
@@ -44,8 +46,19 @@ class HomePage extends StatelessWidget {
                 ),
               ),
             ),
-            const ScrollingCardWidget(
-              big: true,
+            InkWell(
+              onTap: (){
+                showDialog(context: context, builder: (context)=>Dialog(
+                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(28)),
+                  child:PopUp() ,
+                ));
+              },
+              child: const ScrollingCardWidget(
+                big: true,
+              ),
+            ),
+            SizedBox(
+              height: 10,
             ),
             const Padding(
               padding: EdgeInsets.only(top: 15),
@@ -59,7 +72,7 @@ class HomePage extends StatelessWidget {
             ),
             const CategoryTitleWidget(
               title: 'Events',
-              route: CategoriesPage(),
+              route: EventList(),
             ),
             const ScrollingCardWidget(
               big: false,

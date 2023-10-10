@@ -15,11 +15,20 @@ class EventCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
+
+     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    double cardHeight = screenHeight*0.75;
+    double cardwidth = screenWidth*0.65;
+
+    double cardHeightPhoto = screenHeight*0.259;
+    double cardwidthPhoto = screenWidth*0.65;
+
     return Center(
       child: Container(
-        height: big ? 340 : 250,
-        width: big ? 340 : 245,
+        height: big ? cardHeight : 250,
+       // width: big ? 340 : 245,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(30),
@@ -44,11 +53,17 @@ class EventCard extends StatelessWidget {
               ClipRRect(
                 borderRadius: BorderRadius.circular(20),
                 child: SizedBox(
-                  height: big ? 227 : 180,
-                  width: big ? 313 : 226,
-                  child: Image.asset(
-                    "assets/image1.png",
-                    fit: BoxFit.cover,
+                  height: big ? cardHeightPhoto : 180,
+                  width: big ? cardwidthPhoto : 226,
+                  child: Padding(
+                    padding: const EdgeInsets.only(bottom:12.0),
+                    child: Image.asset(
+                      
+                      "assets/image1.png",
+                    
+                      height: 200,
+                      width: 300,
+                    ),
                   ),
                 ),
               ),
@@ -60,7 +75,7 @@ class EventCard extends StatelessWidget {
                 child: Text(title,
                     style: GoogleFonts.dmSans(
                       fontWeight: FontWeight.w500,
-                      fontSize: big ? 25 : 18,
+                      fontSize: big ? 20 : 18,
                     )),
               ),
               Padding(
@@ -71,7 +86,7 @@ class EventCard extends StatelessWidget {
                       style: GoogleFonts.dmSans(
                         color: Colors.black54,
                         fontWeight: FontWeight.w300,
-                        fontSize: big ? 22 : 15,
+                        fontSize: big ? 17 : 15,
                       ),
                       children: [
                         TextSpan(
@@ -79,7 +94,7 @@ class EventCard extends StatelessWidget {
                           style: GoogleFonts.dmSans(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
-                            fontSize: big ? 22 : 15,
+                            fontSize: big ? 17 : 15,
                           ),
                         )
                       ]),

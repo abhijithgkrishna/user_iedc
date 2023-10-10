@@ -1,23 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class Home extends StatelessWidget {
-  const Home({super.key});
+class PopUp extends StatelessWidget {
+  const PopUp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Center(
-      child: SingleChildScrollView(
-        child: Card(
+    return SingleChildScrollView(
+      child: Card(
           elevation: 80,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           shadowColor: Colors.white,
           color: Color.fromARGB(255, 255, 255, 255),
           child: SizedBox(
-            width: 400,
-            height: 680,
+          
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -25,8 +22,8 @@ class Home extends StatelessWidget {
                   ClipRRect(
                     borderRadius: BorderRadius.circular(20),
                     child: SizedBox(
-                      height: 227,
-                      width: 313,
+                      height: 180,
+                      width: 250,
                       child: Image.asset(
                         "assets/image1.png",
                         fit: BoxFit.cover,
@@ -45,7 +42,7 @@ class Home extends StatelessWidget {
                     style: GoogleFonts.dmSans(
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontWeight: FontWeight.w500,
-                        fontSize: 22), //Textstyle
+                        fontSize: 19), //Textstyle
                   ),
                   const SizedBox(
                     height: 10,
@@ -67,8 +64,8 @@ class Home extends StatelessWidget {
                                   text: 'DJ Hall',
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
                                   ),
                                 )
                               ]),
@@ -87,8 +84,8 @@ class Home extends StatelessWidget {
                                   text: '9:00 AM - 10:00 AM',
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
                                   ),
                                 )
                               ]),
@@ -107,8 +104,8 @@ class Home extends StatelessWidget {
                                   text: 'Ongoing',
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
                                   ),
                                 )
                               ]),
@@ -127,8 +124,8 @@ class Home extends StatelessWidget {
                                   text: 'Dr Swaminathan',
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 19,
+                                    fontWeight: FontWeight.w600,
+                                    fontSize: 15,
                                   ),
                                 )
                               ]),
@@ -176,7 +173,8 @@ class Home extends StatelessWidget {
             ),
           ),
         ),
-      ),
-    ));
+    );
+    
+  
   }
 }
