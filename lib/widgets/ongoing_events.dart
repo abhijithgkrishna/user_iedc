@@ -24,7 +24,7 @@ class ScrollingCardWidget extends StatelessWidget {
 
     
     return SizedBox(
-      height: big ? cardheight : 255,
+      height: big ? cardHeight : 255,
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return ListView.separated(
