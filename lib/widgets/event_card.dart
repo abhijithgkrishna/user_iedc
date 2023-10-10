@@ -1,27 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_sanity_image_url/flutter_sanity_image_url.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_iedc/sanity/sanity_config.dart';
 
 class EventCard extends StatelessWidget {
   final bool big;
   final String title;
   final String venue;
+  final Map<String, dynamic> imgUrl;
 
   const EventCard({
     super.key,
     required this.big,
     required this.title,
     required this.venue,
+    required this.imgUrl,
   });
 
   @override
   Widget build(BuildContext context) {
     String truncatedText =
         title.length <= 18 ? title : title.substring(0, 18) + '...';
+
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
 
     double cardHeight = screenHeight * 0.75;
-    // double cardwidth = screenWidth*0.65;
+  // double cardwidth = screenWidth*0.65;
+
 
     double cardHeightPhoto = screenHeight * 0.259;
     double cardwidthPhoto = screenWidth * 0.65;
@@ -60,11 +66,14 @@ class EventCard extends StatelessWidget {
                     padding: EdgeInsets.only(
                       bottom: 12.0,
                       top: big ? 0 : 12,
-                    ),
-                    child: Image.asset(
-                      "assets/image1.png",
-                      height: 200,
-                      width: 300,
+                    )   
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(18),
+                      child: Image.network(
+                        urlFor(SanityImage.fromJson(imgUrl)).size(300, 300).url(),
+                        fit: BoxFit.fill,
+                      ),
+
                     ),
                   ),
                 ),

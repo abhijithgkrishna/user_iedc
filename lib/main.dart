@@ -1,12 +1,31 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+
+import 'package:user_iedc/data/firebase-config.dart';
+import 'package:user_iedc/data/firebase-test.dart';
+import 'package:user_iedc/firebase_options.dart';
+
+import 'package:user_iedc/pages/EventLister.dart';
+import 'package:user_iedc/pages/idPage.dart';
+import 'package:user_iedc/pages/splash_screen.dart';
+import 'package:user_iedc/widgets/event-categories.dart';
+
 import 'package:user_iedc/home_bloc/home_bloc.dart';
 
 import 'package:user_iedc/pages/home_page.dart';
+import 'package:user_iedc/widgets/profile._card.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-void main() {
+
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  );
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -19,7 +38,7 @@ class MyApp extends StatelessWidget {
         title: 'IEDC Summit 2023',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-        home: const HomePage(),
+        home: const Splash(),
       ),
     );
   }

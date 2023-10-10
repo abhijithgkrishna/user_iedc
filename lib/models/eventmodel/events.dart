@@ -22,6 +22,9 @@ class Events with _$Events {
     required String category,
     @JsonKey(name: "venue")
     required String venue,
+    @JsonKey(name: "posterurl")
+    required Map<String,dynamic> posterurl
+
   }) = _Events;
 
   factory Events.fromJson(Map<String, dynamic> json) => _$EventsFromJson(json);
