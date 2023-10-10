@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:user_iedc/pages/idPage.dart';
 
 class ErrorPage extends StatelessWidget {
   const ErrorPage({super.key});
@@ -13,9 +14,9 @@ class ErrorPage extends StatelessWidget {
           children: [
             Icon(Icons.error,size: 120,),
             Text('Wrong Booking ID'),
-            FloatingActionButton(onPressed: (){
-                Navigator.pop(context);
-            },child: Text('Back To Login Page'),)
+           ElevatedButton(onPressed: (){
+                Navigator.of(context).push(MaterialPageRoute(builder: (context)=>IdEnteringPage()));
+           }, child: Text('Back To Login Page'))
           ],
         ),
       )),

@@ -9,6 +9,7 @@ import 'package:user_iedc/pages/idPage.dart';
 import 'package:user_iedc/pages/splash_screen.dart';
 import 'package:user_iedc/widgets/event-categories.dart';
 
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_iedc/home_bloc/home_bloc.dart';
 
 import 'package:user_iedc/pages/home_page.dart';
@@ -19,15 +20,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() async{
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
+   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform
   );
-  runApp(const MyApp());
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var bookingId = prefs.getString("bookingId");
+  print(bookingId);
+ 
+  runApp( MyApp(data:bookingId!));
 }
 
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  final String data;
+  const MyApp({super.key, required this.data});
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,8 @@ class MyApp extends StatelessWidget {
         title: 'User IEDC',
         debugShowCheckedModeBanner: false,
         theme: ThemeData(),
-        home: const Splash(),
+        // ignore: unnecessary_null_comparison
+        home: data == null ? IdEnteringPage():HomePage(),
       ),
     );
   }
