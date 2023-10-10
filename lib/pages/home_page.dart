@@ -11,6 +11,7 @@ import '../widgets/ongoing_events.dart';
 import '../widgets/search_bar.dart';
 
 class HomePage extends StatelessWidget {
+ 
   const HomePage({super.key});
 
   @override
@@ -22,7 +23,7 @@ class HomePage extends StatelessWidget {
         child: Container(
           color: Colors.white,
           height: 150,
-          child: const AppBarWidget(),
+          child:  AppBarWidget(),
         ),
       ),
       body: SafeArea(
@@ -38,7 +39,7 @@ class HomePage extends StatelessWidget {
                   bottom: 10,
                 ),
                 child: Text(
-                  'Ongoing Events :',
+                  'Ongoing Events: ',
                   style: GoogleFonts.dmSans(
                       fontSize: 20,
                       fontWeight: FontWeight.w600,

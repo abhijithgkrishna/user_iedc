@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_iedc/widgets/profile._card.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({
@@ -11,17 +12,16 @@ class AppBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        
         decoration: const BoxDecoration(
           color: Color(0xFFf9f9f9),
         ),
         padding: const EdgeInsets.only(top: 50),
         child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Expanded(
               child: Padding(
-                padding: EdgeInsets.only(left:12,top:5,bottom: 10),
+                padding: EdgeInsets.only(left: 12, top: 5, bottom: 10),
                 child: Text.rich(
                   TextSpan(
                     text: "Track ",
@@ -46,11 +46,20 @@ class AppBarWidget extends StatelessWidget {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(right:16.0),
-                  child: Icon(
-                    
-                    Icons.person,
-                    size: 30,
+                  padding: const EdgeInsets.only(right: 16.0),
+                  child: IconButton(
+                    onPressed: () {
+                      showDialog(
+                          context: context,
+                          barrierDismissible: false,
+                          builder: (context) => Dialog(
+                                elevation: 50,
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(20)),
+                                child: ProfileCard(),
+                              ));
+                    },
+                    icon: Icon(Icons.person_2),
                   ),
                 )
               ],

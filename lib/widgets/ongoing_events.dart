@@ -35,7 +35,7 @@ class ScrollingCardWidget extends StatelessWidget {
             itemBuilder: (ctx, index) => EventCard(
               big: big,
               title: 'AI in mental Health',
-              venue: 'Sargam Stage',
+              venue: 'Ec seminar hall',
             ),
             separatorBuilder: (ctx, index) => const SizedBox(
               width: 20,
