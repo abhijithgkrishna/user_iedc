@@ -24,7 +24,7 @@ class ScrollingCardWidget extends StatelessWidget {
 
     
     return SizedBox(
-      height: big ? cardheight : 255,
+      height: big ? cardHeight : 255,
       child: BlocBuilder<HomeBloc, HomeState>(
         builder: (context, state) {
           return ListView.separated(
@@ -37,14 +37,10 @@ class ScrollingCardWidget extends StatelessWidget {
             scrollDirection: Axis.horizontal,
             itemBuilder: (ctx, index) => EventCard(
               big: big,
-<<<<<<< HEAD
-              title: 'AI in mental Health',
-              venue: 'Ec seminar hall',
-=======
+
 
               title: state.data[index].eventname,
               venue: state.data[index].venue,
->>>>>>> b902579b8af08579164d781a646c9ac810903730
             ),
             separatorBuilder: (ctx, index) => const SizedBox(
               width: 20,

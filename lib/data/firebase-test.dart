@@ -56,7 +56,7 @@ class _TestDataState extends State<TestData> {
         children: [
           Center(
             child: Text(
-              "mobile: $mobile",
+              "Gender: $mobile",
               style: TextStyle(fontSize: 20),
             ),
           ),

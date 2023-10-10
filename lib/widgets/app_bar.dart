@@ -6,6 +6,7 @@ import 'package:user_iedc/widgets/profile._card.dart';
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({
     super.key,
+    
   });
 
   @override
