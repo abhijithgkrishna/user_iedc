@@ -3,7 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_iedc/pages/idPage.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProfileCard extends StatefulWidget {
@@ -17,57 +16,59 @@ class _ProfileCardState extends State<ProfileCard> {
   String name = '';
   String phoneNumber = '';
   String? bookingId;
+  bool isLoading = true;
 
   @override
   void initState() {
     super.initState();
+    sharedPreferencesFunction();
   }
 
-  
-  sharedPreferencesFunction() async {
+  Future<void> sharedPreferencesFunction() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bookingId = prefs.getString("bookingId");
+    if (bookingId != null) {
+      retrieveData();
+    } else {
+      // Handle the case when bookingId is null (e.g., show an error message)
+      setState(() {
+        isLoading = false;
+      });
+    }
   }
 
-  retrieveData() async {
-    print("---hi--");
-
+  Future<void> retrieveData() async {
     try {
-      print(bookingId);
       // Replace 'your_collection_name' with your actual collection name
       DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
           .collection('attendees')
-          .doc(bookingId) // Replace with the document ID
+          .doc(bookingId!) // Use the non-nullable bookingId
           .get();
-      print("-----$documentSnapshot-----");
       if (documentSnapshot.exists) {
-        // Cast data() to Map<String, dynamic> to access fields
         final data = documentSnapshot.data() as Map<String, dynamic>;
         final name = data['name'] ?? "Name not found";
         final phoneNumber = data['mobile'];
         setState(() {
           this.name = name;
           this.phoneNumber = phoneNumber;
+          isLoading = false;
         });
       } else {
         setState(() {
           name = "Document not found";
+          isLoading = false;
         });
-        return;
       }
     } catch (e) {
       setState(() {
         name = "Error retrieving document: $e";
+        isLoading = false;
       });
-      return;
     }
-    return;
   }
 
   @override
   Widget build(BuildContext context) {
-    sharedPreferencesFunction();
-    retrieveData();
     return SingleChildScrollView(
       child: Card(
         elevation: 50,
@@ -92,19 +93,26 @@ class _ProfileCardState extends State<ProfileCard> {
                     ],
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: SizedBox(
-                      height: 195,
-                      width: 250,
-                      child: Center(
-                        child: QrImageView(
-                          data: bookingId!,
-                          version: QrVersions.auto,
+                if (isLoading) // Show a loading indicator
+                  CircularProgressIndicator()
+                else
+                  Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: SizedBox(
+                          height: 195,
+                          width: 250,
+                          child: Center(
+                            child: QrImageView(
+                              data: bookingId!,
+                              version: QrVersions.auto,
+                            ),
+                          ),
                         ),
-                      )),
-                ), //CircleAvatar
-                const SizedBox(
+                      ),
+                      const SizedBox(height: 10),
+                       const SizedBox(
                   height: 10,
                 ),
                 const SizedBox(
@@ -185,8 +193,10 @@ class _ProfileCardState extends State<ProfileCard> {
                     },
                     child: Text('Logout'))
                 //Text
-
-                //SizedBox
+                      // ... Rest of your code to display the profile details
+                      // (name, phoneNumber, etc.)
+                    ],
+                  ),
               ],
             ),
           ),

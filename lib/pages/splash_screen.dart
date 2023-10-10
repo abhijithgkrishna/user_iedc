@@ -26,7 +26,7 @@ class _SplashState extends State<Splash> {
   var bookingId = prefs.getString("bookingId");
   }
   _navigatetohome() async {
-    await Future.delayed(Duration(milliseconds: 2000));
+    await Future.delayed(Duration(milliseconds: 1800));
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context){
      return widget.bookingId == null ? IdEnteringPage() : HomePage();
     }));
