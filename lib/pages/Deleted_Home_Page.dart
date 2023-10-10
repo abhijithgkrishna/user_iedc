@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class DeletedHomePage extends StatelessWidget {
+  const DeletedHomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
