@@ -1,9 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:user_iedc/pages/idPage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-class ProfileCard extends StatelessWidget {
+class ProfileCard extends StatefulWidget {
   const ProfileCard({super.key});
+
+  @override
+  State<ProfileCard> createState() => _ProfileCardState();
+}
+
+class _ProfileCardState extends State<ProfileCard> {
+  String name = '';
+  String phoneNumber = '';
+  String? bookingId;
+  bool isLoading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    sharedPreferencesFunction();
+  }
+
+  Future<void> sharedPreferencesFunction() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    bookingId = prefs.getString("bookingId");
+    if (bookingId != null) {
+      retrieveData();
+    } else {
+      // Handle the case when bookingId is null (e.g., show an error message)
+      setState(() {
+        isLoading = false;
+      });
+    }
+  }
+
+  Future<void> retrieveData() async {
+    try {
+      // Replace 'your_collection_name' with your actual collection name
+      DocumentSnapshot documentSnapshot = await FirebaseFirestore.instance
+          .collection('attendees')
+          .doc(bookingId!) // Use the non-nullable bookingId
+          .get();
+      if (documentSnapshot.exists) {
+        final data = documentSnapshot.data() as Map<String, dynamic>;
+        final name = data['name'] ?? "Name not found";
+        final phoneNumber = data['mobile'];
+        setState(() {
+          this.name = name;
+          this.phoneNumber = phoneNumber;
+          isLoading = false;
+        });
+      } else {
+        setState(() {
+          name = "Document not found";
+          isLoading = false;
+        });
+      }
+    } catch (e) {
+      setState(() {
+        name = "Error retrieving document: $e";
+        isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -31,19 +93,26 @@ class ProfileCard extends StatelessWidget {
                     ],
                   ),
                 ),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: SizedBox(
-                      height: 195,
-                      width: 250,
-                      child: Center(
-                        child: QrImageView(
-                          data: '1234567890',
-                          version: QrVersions.auto,
+                if (isLoading) // Show a loading indicator
+                  CircularProgressIndicator()
+                else
+                  Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(20),
+                        child: SizedBox(
+                          height: 195,
+                          width: 250,
+                          child: Center(
+                            child: QrImageView(
+                              data: bookingId!,
+                              version: QrVersions.auto,
+                            ),
+                          ),
                         ),
-                      )),
-                ), //CircleAvatar
-                const SizedBox(
+                      ),
+                      const SizedBox(height: 10),
+                       const SizedBox(
                   height: 10,
                 ),
                 const SizedBox(
@@ -51,7 +120,7 @@ class ProfileCard extends StatelessWidget {
                 ),
                 //SizedBox
                 Text(
-                  'Adith Ramdas',
+                  name,
                   style: GoogleFonts.dmSans(
                       color: Color.fromARGB(255, 0, 0, 0),
                       fontWeight: FontWeight.w500,
@@ -68,13 +137,13 @@ class ProfileCard extends StatelessWidget {
                       padding: const EdgeInsets.only(left: 0),
                       child: Text.rich(
                         TextSpan(
-                            text: 'College : ',
+                            text: 'Phone Number : ',
                             style: GoogleFonts.dmSans(
                                 color: Colors.black54,
                                 fontWeight: FontWeight.w800),
                             children: [
                               TextSpan(
-                                text: 'CET TRIVANDRUM',
+                                text: phoneNumber,
                                 style: GoogleFonts.dmSans(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -94,7 +163,7 @@ class ProfileCard extends StatelessWidget {
                                 fontWeight: FontWeight.w800),
                             children: [
                               TextSpan(
-                                text: 'jddjfsdjd545',
+                                text: bookingId,
                                 style: GoogleFonts.dmSans(
                                   color: Colors.black,
                                   fontWeight: FontWeight.w600,
@@ -106,9 +175,28 @@ class ProfileCard extends StatelessWidget {
                     ),
                   ],
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                TextButton(
+                    onPressed: () async {
+                      SharedPreferences pref =
+                          await SharedPreferences.getInstance();
+                      pref.remove("bookingId");
+                      Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => IdEnteringPage()),
+                        (route) =>
+                            false, // This prevents going back to the previous route
+                      );
+                    },
+                    child: Text('Logout'))
                 //Text
-
-                //SizedBox
+                      // ... Rest of your code to display the profile details
+                      // (name, phoneNumber, etc.)
+                    ],
+                  ),
               ],
             ),
           ),

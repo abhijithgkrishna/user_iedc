@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_iedc/pages/error_page.dart';
 import 'package:user_iedc/pages/home_page.dart';
 import 'package:user_iedc/widgets/app_bar.dart';
@@ -21,6 +22,8 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
   String data = '';
 
   Future<void> firebaseChecking() async {
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    pref.setString("bookingId",bookingIDController.text);
     setState(() {
       isLoading = true;
     });
@@ -82,7 +85,7 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
                           text: "Enter Your Booking ID",
                           style: GoogleFonts.dmSans(
                             color: Colors.black,
-                            fontWeight: FontWeight.w400,
+                            fontWeight: FontWeight.w500,
                             fontSize: 21,
                           ),
                           children: [
@@ -121,11 +124,14 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 15,
                   ),
                   ElevatedButton(
+                    style:ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromARGB(31, 237, 233, 233)
+                    ),
                     onPressed: isLoading ? null : firebaseChecking,
-                    child:Text('Login'),
+                    child:Text('Login',style: TextStyle(color: Colors.black87),),
                     
                   ),
                   isLoading
