@@ -167,8 +167,12 @@ class CategoriesEvent extends StatelessWidget {
                                                 TextSpan(
                                                   text: DateFormat.jm().format(
                                                       DateTime.parse(
-                                                          categoryEvent[index]
-                                                              .starttime)),
+                                                              categoryEvent[
+                                                                      index]
+                                                                  .starttime)
+                                                          .add(Duration(
+                                                              hours: 5,
+                                                              minutes: 30))),
                                                   style: GoogleFonts.dmSans(
                                                     color: Colors.black,
                                                     fontWeight: FontWeight.w600,

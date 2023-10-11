@@ -91,8 +91,9 @@ class PopUp extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                               children: [
                                 TextSpan(
-                                  text: DateFormat.jm()
-                                      .format(DateTime.parse(event.starttime)),
+                                  text: DateFormat.jm().format(
+                                      DateTime.parse(event.starttime).add(
+                                          Duration(hours: 5, minutes: 30))),
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
