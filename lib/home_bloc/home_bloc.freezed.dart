@@ -166,6 +166,8 @@ abstract class _FetchData implements HomeEvent {
 /// @nodoc
 mixin _$HomeState {
   List<dynamic> get data => throw _privateConstructorUsedError;
+  List<dynamic> get categories => throw _privateConstructorUsedError;
+  List<dynamic> get venues => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $HomeStateCopyWith<HomeState> get copyWith =>
@@ -177,7 +179,8 @@ abstract class $HomeStateCopyWith<$Res> {
   factory $HomeStateCopyWith(HomeState value, $Res Function(HomeState) then) =
       _$HomeStateCopyWithImpl<$Res, HomeState>;
   @useResult
-  $Res call({List<dynamic> data});
+  $Res call(
+      {List<dynamic> data, List<dynamic> categories, List<dynamic> venues});
 }
 
 /// @nodoc
@@ -194,11 +197,21 @@ class _$HomeStateCopyWithImpl<$Res, $Val extends HomeState>
   @override
   $Res call({
     Object? data = null,
+    Object? categories = null,
+    Object? venues = null,
   }) {
     return _then(_value.copyWith(
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      categories: null == categories
+          ? _value.categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      venues: null == venues
+          ? _value.venues
+          : venues // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
     ) as $Val);
   }
@@ -212,7 +225,8 @@ abstract class _$$HomeStateImplCopyWith<$Res>
       __$$HomeStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({List<dynamic> data});
+  $Res call(
+      {List<dynamic> data, List<dynamic> categories, List<dynamic> venues});
 }
 
 /// @nodoc
@@ -227,11 +241,21 @@ class __$$HomeStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? data = null,
+    Object? categories = null,
+    Object? venues = null,
   }) {
     return _then(_$HomeStateImpl(
       data: null == data
           ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      categories: null == categories
+          ? _value._categories
+          : categories // ignore: cast_nullable_to_non_nullable
+              as List<dynamic>,
+      venues: null == venues
+          ? _value._venues
+          : venues // ignore: cast_nullable_to_non_nullable
               as List<dynamic>,
     ));
   }
@@ -240,7 +264,13 @@ class __$$HomeStateImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$HomeStateImpl implements _HomeState {
-  const _$HomeStateImpl({required final List<dynamic> data}) : _data = data;
+  const _$HomeStateImpl(
+      {required final List<dynamic> data,
+      required final List<dynamic> categories,
+      required final List<dynamic> venues})
+      : _data = data,
+        _categories = categories,
+        _venues = venues;
 
   final List<dynamic> _data;
   @override
@@ -250,9 +280,25 @@ class _$HomeStateImpl implements _HomeState {
     return EqualUnmodifiableListView(_data);
   }
 
+  final List<dynamic> _categories;
+  @override
+  List<dynamic> get categories {
+    if (_categories is EqualUnmodifiableListView) return _categories;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_categories);
+  }
+
+  final List<dynamic> _venues;
+  @override
+  List<dynamic> get venues {
+    if (_venues is EqualUnmodifiableListView) return _venues;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_venues);
+  }
+
   @override
   String toString() {
-    return 'HomeState(data: $data)';
+    return 'HomeState(data: $data, categories: $categories, venues: $venues)';
   }
 
   @override
@@ -260,12 +306,18 @@ class _$HomeStateImpl implements _HomeState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$HomeStateImpl &&
-            const DeepCollectionEquality().equals(other._data, _data));
+            const DeepCollectionEquality().equals(other._data, _data) &&
+            const DeepCollectionEquality()
+                .equals(other._categories, _categories) &&
+            const DeepCollectionEquality().equals(other._venues, _venues));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_data));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(_data),
+      const DeepCollectionEquality().hash(_categories),
+      const DeepCollectionEquality().hash(_venues));
 
   @JsonKey(ignore: true)
   @override
@@ -275,11 +327,17 @@ class _$HomeStateImpl implements _HomeState {
 }
 
 abstract class _HomeState implements HomeState {
-  const factory _HomeState({required final List<dynamic> data}) =
-      _$HomeStateImpl;
+  const factory _HomeState(
+      {required final List<dynamic> data,
+      required final List<dynamic> categories,
+      required final List<dynamic> venues}) = _$HomeStateImpl;
 
   @override
   List<dynamic> get data;
+  @override
+  List<dynamic> get categories;
+  @override
+  List<dynamic> get venues;
   @override
   @JsonKey(ignore: true)
   _$$HomeStateImplCopyWith<_$HomeStateImpl> get copyWith =>

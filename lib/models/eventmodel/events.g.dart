@@ -16,6 +16,7 @@ _$EventsImpl _$$EventsImplFromJson(Map<String, dynamic> json) => _$EventsImpl(
       category: json['category'] as String,
       venue: json['venue'] as String,
       posterurl: json['posterurl'] as Map<String, dynamic>,
+      description: json['description'] as String,
     );
 
 Map<String, dynamic> _$$EventsImplToJson(_$EventsImpl instance) =>
@@ -29,4 +30,5 @@ Map<String, dynamic> _$$EventsImplToJson(_$EventsImpl instance) =>
       'category': instance.category,
       'venue': instance.venue,
       'posterurl': instance.posterurl,
+      'description': instance.description,
     };

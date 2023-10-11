@@ -12,22 +12,13 @@ class ScrollingCardWidget extends StatelessWidget {
     required this.big,
     super.key,
   });
-  final HomeBloc homebloc = HomeBloc();
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<HomeBloc>(context).add(const HomeEvent.fetchData());
-    });
     double screenWidth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    final List eventlist = homebloc.getEventList();
     double cardHeight = screenHeight * 0.39;
     //double cardwidth = screenWidth * 0.8;
-
-    bool condition(Events event) {
-      return event.status == "ongoing";
-    }
 
     return SizedBox(
       height: big ? cardHeight : 255,
@@ -39,7 +30,11 @@ class ScrollingCardWidget extends StatelessWidget {
             ongoingEvents = eventlist;
           } else {
             for (Events event in eventlist) {
-              if (event.status == "ongoing") {
+              DateTime start = DateTime.parse(event.starttime);
+              DateTime end = DateTime.parse(event.endtime);
+
+              if (start.isBefore(DateTime.now()) &&
+                  end.isAfter(DateTime.now())) {
                 ongoingEvents.add(event);
               }
             }
@@ -66,12 +61,10 @@ class ScrollingCardWidget extends StatelessWidget {
                         ));
               },
               child: EventCard(
-                big: big,
-                title: ongoingEvents[index].eventname,
-                venue: ongoingEvents[index].venue,
-                imgUrl: state.data[index].posterurl
-              ),
-
+                  big: big,
+                  title: ongoingEvents[index].eventname,
+                  venue: ongoingEvents[index].venue,
+                  imgUrl: state.data[index].posterurl),
             ),
             separatorBuilder: (ctx, index) => const SizedBox(
               width: 20,

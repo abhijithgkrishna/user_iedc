@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_iedc/pages/EventLister.dart';
 import 'package:user_iedc/pages/categories_page.dart';
 
+import '../home_bloc/home_bloc.dart';
 import '../widgets/app_bar.dart';
 import '../widgets/category_tile.dart';
 import '../widgets/category_title.dart';
@@ -13,6 +15,9 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<HomeBloc>(context).add(const HomeEvent.fetchData());
+    });
     return Scaffold(
       backgroundColor: const Color(0xFFf9f9f9),
       appBar: PreferredSize(

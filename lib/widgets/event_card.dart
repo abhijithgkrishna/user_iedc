@@ -26,8 +26,7 @@ class EventCard extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height;
 
     double cardHeight = screenHeight * 0.75;
-  // double cardwidth = screenWidth*0.65;
-
+    // double cardwidth = screenWidth*0.65;
 
     double cardHeightPhoto = screenHeight * 0.259;
     double cardwidthPhoto = screenWidth * 0.65;
@@ -66,14 +65,15 @@ class EventCard extends StatelessWidget {
                     padding: EdgeInsets.only(
                       bottom: 12.0,
                       top: big ? 0 : 12,
-                    )   
+                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(18),
                       child: Image.network(
-                        urlFor(SanityImage.fromJson(imgUrl)).size(300, 300).url(),
+                        urlFor(SanityImage.fromJson(imgUrl))
+                            .size(300, 300)
+                            .url(),
                         fit: BoxFit.fill,
                       ),
-
                     ),
                   ),
                 ),

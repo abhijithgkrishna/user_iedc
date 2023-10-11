@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sanity_image_url/flutter_sanity_image_url.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../home_bloc/home_bloc.dart';
 import '../models/eventmodel/events.dart';
+import '../sanity/sanity_config.dart';
 
 class CategoriesEvent extends StatelessWidget {
   final String categoryname;
@@ -88,9 +91,13 @@ class CategoriesEvent extends StatelessWidget {
                                       child: SizedBox(
                                         height: 100,
                                         width: 100,
-                                        child: Image.asset(
-                                          "assets/image1.png",
-                                          fit: BoxFit.cover,
+                                        child: Image.network(
+                                          urlFor(SanityImage.fromJson(
+                                                  categoryEvent[index]
+                                                      .posterurl))
+                                              .size(300, 300)
+                                              .url(),
+                                          fit: BoxFit.fill,
                                         ),
                                       ),
                                     ),
@@ -103,8 +110,12 @@ class CategoriesEvent extends StatelessWidget {
                                       children: [
                                         Text.rich(
                                           TextSpan(
-                                            text:
-                                                categoryEvent[index].eventname,
+                                            text: categoryEvent[index]
+                                                        .eventname
+                                                        .length <
+                                                    12
+                                                ? categoryEvent[index].eventname
+                                                : '${categoryEvent[index].eventname.substring(0, 12)}...',
                                             style: GoogleFonts.dmSans(
                                               color: Colors.black,
                                               fontSize: 13,
@@ -146,8 +157,10 @@ class CategoriesEvent extends StatelessWidget {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text: categoryEvent[index]
-                                                    .starttime,
+                                                text: DateFormat.jm().format(
+                                                    DateTime.parse(
+                                                        categoryEvent[index]
+                                                            .starttime)),
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
@@ -159,7 +172,7 @@ class CategoriesEvent extends StatelessWidget {
                                         ),
                                         Text.rich(
                                           TextSpan(
-                                            text: 'Status : ',
+                                            text: 'Speaker : ',
                                             style: GoogleFonts.dmSans(
                                               color: Colors.blue,
                                               fontSize: 11,
@@ -167,8 +180,8 @@ class CategoriesEvent extends StatelessWidget {
                                             ),
                                             children: [
                                               TextSpan(
-                                                text:
-                                                    categoryEvent[index].status,
+                                                text: categoryEvent[index]
+                                                    .speaker,
                                                 style: GoogleFonts.dmSans(
                                                   color: Colors.black,
                                                   fontWeight: FontWeight.w600,
