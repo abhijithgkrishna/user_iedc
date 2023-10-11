@@ -1,6 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:user_iedc/models/categorymodel/categories.dart';
-import 'package:user_iedc/models/venuemodel/venues.dart';
 
 part 'events.g.dart';
 part 'events.freezed.dart';
@@ -24,6 +22,9 @@ class Events with _$Events {
     required String category,
     @JsonKey(name: "venue")
     required String venue,
+    @JsonKey(name: "posterurl")
+    required Map<String,dynamic> posterurl
+
   }) = _Events;
 
   factory Events.fromJson(Map<String, dynamic> json) => _$EventsFromJson(json);

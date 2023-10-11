@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:user_iedc/models/eventmodel/events.dart';
+import '../home_bloc/home_bloc.dart';
 
 class PopUp extends StatelessWidget {
-  const PopUp({super.key});
+  final Events event;
+
+  const PopUp({super.key, required this.event});
 
   @override
   Widget build(BuildContext context) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      BlocProvider.of<HomeBloc>(context).add(const HomeEvent.fetchData());
+    });
+
     return SingleChildScrollView(
-      child: Card(
+      child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+        return Card(
           elevation: 80,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           shadowColor: Colors.white,
           color: Color.fromARGB(255, 255, 255, 255),
           child: SizedBox(
-          
             child: Padding(
               padding: const EdgeInsets.all(24.0),
               child: Column(
@@ -38,7 +47,7 @@ class PopUp extends StatelessWidget {
                   ),
                   //SizedBox
                   Text(
-                    'AI In mental health',
+                    event.eventname,
                     style: GoogleFonts.dmSans(
                         color: Color.fromARGB(255, 0, 0, 0),
                         fontWeight: FontWeight.w500,
@@ -52,7 +61,7 @@ class PopUp extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.only(left: 0),
+                        padding: const EdgeInsets.only(left: 8),
                         child: Text.rich(
                           TextSpan(
                               text: 'Venue : ',
@@ -61,7 +70,7 @@ class PopUp extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                               children: [
                                 TextSpan(
-                                  text: 'DJ Hall',
+                                  text: event.venue,
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
@@ -81,7 +90,7 @@ class PopUp extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                               children: [
                                 TextSpan(
-                                  text: '9:00 AM - 10:00 AM',
+                                  text: event.starttime,
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
@@ -101,7 +110,7 @@ class PopUp extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                               children: [
                                 TextSpan(
-                                  text: 'Ongoing',
+                                  text: event.status,
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
@@ -121,7 +130,7 @@ class PopUp extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                               children: [
                                 TextSpan(
-                                  text: 'Dr Swaminathan',
+                                  text: event.speaker,
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
@@ -148,23 +157,7 @@ class PopUp extends StatelessWidget {
                     height: 50,
                   ),
                   //SizedBox
-                  Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Go to venue',
-                        style: TextStyle(
-                            color: const Color.fromARGB(255, 3, 102, 183),
-                            fontWeight: FontWeight.w600),
-                      ),
-                      Icon(
-                        Icons.notifications_none_outlined,
-                        size: 30,
-                        color: const Color.fromARGB(255, 3, 102, 183),
-                      )
-                    ],
-                  ),
+
                   SizedBox(
                     width: 100,
                   )
@@ -172,9 +165,8 @@ class PopUp extends StatelessWidget {
               ),
             ),
           ),
-        ),
+        );
+      }),
     );
-    
-  
   }
 }
