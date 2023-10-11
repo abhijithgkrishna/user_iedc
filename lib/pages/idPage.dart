@@ -3,10 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:user_iedc/pages/error_page.dart';
 import 'package:user_iedc/pages/home_page.dart';
-import 'package:user_iedc/widgets/app_bar.dart';
-import 'package:user_iedc/widgets/profile._card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
 
 class IdEnteringPage extends StatefulWidget {
   IdEnteringPage({

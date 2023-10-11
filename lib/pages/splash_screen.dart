@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:user_iedc/pages/home_page.dart';
 import 'package:user_iedc/pages/idPage.dart';
 import 'package:shared_preferences/shared_preferences.dart';

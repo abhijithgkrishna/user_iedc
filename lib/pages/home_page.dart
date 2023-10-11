@@ -7,7 +7,6 @@ import 'package:user_iedc/pages/categories_page.dart';
 import 'package:user_iedc/pages/developers_page.dart';
 
 import '../home_bloc/home_bloc.dart';
-import '../widgets/app_bar.dart';
 import '../widgets/category_tile.dart';
 import '../widgets/category_title.dart';
 import '../widgets/ongoing_events.dart';
