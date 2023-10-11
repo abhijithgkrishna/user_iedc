@@ -93,7 +93,7 @@ class HomePage extends StatelessWidget {
                     bottom: 10,
                   ),
                   child: Text(
-                    'Ongoing Events :',
+                    'Upcoming Events :',
                     style: GoogleFonts.dmSans(
                         fontSize: 20,
                         fontWeight: FontWeight.w600,

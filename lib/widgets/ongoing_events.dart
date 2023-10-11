@@ -33,8 +33,15 @@ class ScrollingCardWidget extends StatelessWidget {
               DateTime start = DateTime.parse(event.starttime);
               DateTime end = DateTime.parse(event.endtime);
 
-              if (start.isBefore(DateTime.now()) &&
-                  end.isAfter(DateTime.now())) {
+              // if (start.isAfter(
+              //         DateTime.now().subtract(Duration(minutes: 30))) &&
+              //     end.isBefore(DateTime.now().add(Duration(minutes: 5)))) {
+              //   ongoingEvents.add(event);
+              // }
+              if (start
+                      .subtract(Duration(minutes: 30))
+                      .isBefore(DateTime.now()) &&
+                  start.add(Duration(minutes: 5)).isAfter(DateTime.now())) {
                 ongoingEvents.add(event);
               }
             }
