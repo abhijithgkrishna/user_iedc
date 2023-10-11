@@ -36,7 +36,7 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       // }).toList();
 
       log(response.toString());
-      // print(response[0]);
+      print(response[0]);
       // //print(downloadsList[0].toString());
       // //print(downloadsList.toString());
       // print('test');

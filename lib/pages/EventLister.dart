@@ -94,7 +94,7 @@ class _EventListState extends State<EventList> {
                                     children: [
                                       Text(
                                         state.data[index].eventname,
-                                        overflow: TextOverflow.fade,
+                                        overflow: TextOverflow.ellipsis,
                                         maxLines: 1,
                                         softWrap: false,
                                         style: GoogleFonts.dmSans(
@@ -116,7 +116,8 @@ class _EventListState extends State<EventList> {
                                           ),
                                           children: [
                                             TextSpan(
-                                              text: state.data[index].venue,
+                                              text: state.data[index].venue
+                                                  .substring(0, 9),
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
@@ -157,7 +158,8 @@ class _EventListState extends State<EventList> {
                                           ),
                                           children: [
                                             TextSpan(
-                                              text: state.data[index].speaker,
+                                              text: state.data[index].speaker
+                                                  .substring(0, 10),
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
