@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_iedc/pages/EventLister.dart';
 import 'package:user_iedc/pages/categories_page.dart';
+import 'package:user_iedc/pages/developers_page.dart';
 
 import '../home_bloc/home_bloc.dart';
 import '../widgets/app_bar.dart';
@@ -41,14 +42,15 @@ class HomePage extends StatelessWidget {
             child: IconButton(
               onPressed: () {
                 showDialog(
-                    context: context,
-                    barrierDismissible: false,
-                    builder: (context) => Dialog(
-                          elevation: 50,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(20)),
-                          child: ProfileCard(),
-                        ));
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (context) => Dialog(
+                    elevation: 50,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20)),
+                    child: DevPop(),
+                  ),
+                );
               },
               icon: Icon(
                 Icons.info_outline_rounded,
