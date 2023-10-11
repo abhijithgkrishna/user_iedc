@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_sanity/flutter_sanity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:user_iedc/models/eventmodel/events.dart';
 
