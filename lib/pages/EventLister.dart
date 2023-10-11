@@ -117,8 +117,12 @@ class _EventListState extends State<EventList> {
                                           children: [
                                             TextSpan(
                                               text: state.data[index].venue
-                                                      .substring(0, 9) +
-                                                  '..',
+                                                          .length >
+                                                      10
+                                                  ? state.data[index].venue
+                                                          .substring(0, 9) +
+                                                      '..'
+                                                  : state.data[index].venue,
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
@@ -160,8 +164,12 @@ class _EventListState extends State<EventList> {
                                           children: [
                                             TextSpan(
                                               text: state.data[index].speaker
-                                                      .substring(0, 10) +
-                                                  '..',
+                                                          .length >
+                                                      10
+                                                  ? state.data[index].speaker
+                                                          .substring(0, 10) +
+                                                      '..'
+                                                  : state.data[index].speaker,
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
