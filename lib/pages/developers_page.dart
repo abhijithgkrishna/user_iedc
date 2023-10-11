@@ -15,7 +15,8 @@ class DevPop extends StatelessWidget {
                 SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
             itemBuilder: (context, int) => CircleAvatar(
               child: Image.network(
-                  'https://www.google.com/imgres?imgurl=https%3A%2F%2Fapi.brusselstimes.com%2Fwp-content%2Fuploads%2F2019%2F05%2Fvddriessche-c-stamp-media.jpg&tbnid=i9oXReHMgrz-7M&vet=12ahUKEwjzg-qlpu2BAxU-5DgGHaL9AdgQMygSegQIARBl..i&imgrefurl=https%3A%2F%2Fwww.brusselstimes.com%2F57558%2Fvlaams-belang-put-up-dummy-female-candidates-to-ensure-election-of-men&docid=Mm-lKFlBvmNxZM&w=800&h=600&q=dummy%20image%20person&ved=2ahUKEwjzg-qlpu2BAxU-5DgGHaL9AdgQMygSegQIARBl'),
+                'https://avatars.githubusercontent.com/u/55942632?v=4',
+              ),
             ),
           ),
         ),
