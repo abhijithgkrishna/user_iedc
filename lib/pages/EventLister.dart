@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_sanity_image_url/flutter_sanity_image_url.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
+import 'package:user_iedc/widgets/pop-up.dart';
 
 import '../home_bloc/home_bloc.dart';
 import '../sanity/sanity_config.dart';
@@ -53,106 +54,126 @@ class _EventListState extends State<EventList> {
                     itemBuilder: (BuildContext context, int index) {
                       return Container(
                         height: 95, // Set the desired height of the ListTile
-                        child: ListTile(
-                          title: Row(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(20),
-                                child: SizedBox(
-                                  height: 100,
-                                  width: 100,
-                                  child: Image.network(
-                                    urlFor(SanityImage.fromJson(
-                                            state.data[index].posterurl))
-                                        .size(300, 300)
-                                        .url(),
-                                    fit: BoxFit.fill,
+                        child: InkWell(
+                          onTap: () {
+                            showDialog(
+                                context: context,
+                                builder: (context) => Dialog(
+                                      shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(28)),
+                                      child: PopUp(
+                                        event: state.data[index],
+                                      ),
+                                    ));
+                          },
+                          child: ListTile(
+                            title: Row(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: SizedBox(
+                                    height: 100,
+                                    width: 100,
+                                    child: Image.network(
+                                      urlFor(SanityImage.fromJson(
+                                              state.data[index].posterurl))
+                                          .size(300, 300)
+                                          .url(),
+                                      fit: BoxFit.fill,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                width: 20,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text.rich(
-                                    TextSpan(
-                                      text: state.data[index].eventname,
-                                      style: GoogleFonts.dmSans(
-                                        color: Colors.black,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w800,
+                                SizedBox(
+                                  width: 20,
+                                ),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        state.data[index].eventname,
+                                        overflow: TextOverflow.ellipsis,
+                                        maxLines: 1,
+                                        softWrap: false,
+                                        style: GoogleFonts.dmSans(
+                                          color: Colors.black,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w800,
+                                        ),
                                       ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 4,
-                                  ),
-                                  Text.rich(
-                                    TextSpan(
-                                      text: 'Venue : ',
-                                      style: GoogleFonts.dmSans(
-                                        color: Colors.blue,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
+                                      SizedBox(
+                                        height: 4,
                                       ),
-                                      children: [
+                                      Text.rich(
                                         TextSpan(
-                                          text: state.data[index].venue,
+                                          text: 'Venue : ',
                                           style: GoogleFonts.dmSans(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
+                                            color: Colors.blue,
                                             fontSize: 15,
+                                            fontWeight: FontWeight.w600,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Text.rich(
-                                    TextSpan(
-                                      text: 'Time : ',
-                                      style: GoogleFonts.dmSans(
-                                        color: Colors.blue,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
+                                          children: [
+                                            TextSpan(
+                                              text: state.data[index].venue
+                                                  .substring(0, 9),
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 15,
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                      children: [
+                                      Text.rich(
                                         TextSpan(
-                                          text:
-                                              '${DateFormat.jm().format(DateTime.parse(state.data[index].starttime))} - ${DateFormat.jm().format(DateTime.parse(state.data[index].endtime))}',
+                                          text: 'Time : ',
                                           style: GoogleFonts.dmSans(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
+                                            color: Colors.blue,
                                             fontSize: 15,
+                                            fontWeight: FontWeight.w600,
                                           ),
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                  Text.rich(
-                                    TextSpan(
-                                      text: 'Speaker : ',
-                                      style: GoogleFonts.dmSans(
-                                        color: Colors.blue,
-                                        fontSize: 15,
-                                        fontWeight: FontWeight.w600,
+                                          children: [
+                                            TextSpan(
+                                              text:
+                                                  '${DateFormat.jm().format(DateTime.parse(state.data[index].starttime))} - ${DateFormat.jm().format(DateTime.parse(state.data[index].endtime))}',
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 15,
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                      children: [
+                                      Text.rich(
                                         TextSpan(
-                                          text: state.data[index].speaker,
+                                          text: 'Speaker : ',
                                           style: GoogleFonts.dmSans(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.w600,
+                                            color: Colors.blue,
                                             fontSize: 15,
+                                            fontWeight: FontWeight.w600,
                                           ),
-                                        )
-                                      ],
-                                    ),
+                                          children: [
+                                            TextSpan(
+                                              text: state.data[index].speaker
+                                                  .substring(0, 10),
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.w600,
+                                                fontSize: 15,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ],
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                       );

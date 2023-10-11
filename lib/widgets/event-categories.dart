@@ -16,6 +16,12 @@ class CategoriesEvent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double screenHeight = MediaQuery.of(context).size.height;
+    double screenWidth = MediaQuery.of(context).size.width;
+
+    double cardHeight = screenHeight * 0.65;
+    double cardWidth = screenWidth * 0.8;
+
     return SingleChildScrollView(
       child: Card(
         elevation: 80,
@@ -25,8 +31,8 @@ class CategoriesEvent extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.all(12.0),
           child: SizedBox(
-            height: 500,
-            width: 400,
+            height: cardHeight,
+            width: cardWidth,
             child: Padding(
               padding: const EdgeInsets.all(4.0),
               child: Column(
@@ -104,94 +110,97 @@ class CategoriesEvent extends StatelessWidget {
                                     SizedBox(
                                       width: 20,
                                     ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text.rich(
-                                          TextSpan(
-                                            text: categoryEvent[index]
+                                    Expanded(
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            categoryEvent[index]
                                                         .eventname
                                                         .length <
                                                     12
                                                 ? categoryEvent[index].eventname
                                                 : '${categoryEvent[index].eventname.substring(0, 12)}...',
+                                            overflow: TextOverflow.fade,
+                                            maxLines: 1,
+                                            softWrap: false,
                                             style: GoogleFonts.dmSans(
                                               color: Colors.black,
                                               fontSize: 13,
                                               fontWeight: FontWeight.w800,
                                             ),
                                           ),
-                                        ),
-                                        SizedBox(
-                                          height: 4,
-                                        ),
-                                        Text.rich(
-                                          TextSpan(
-                                            text: 'Venue : ',
-                                            style: GoogleFonts.dmSans(
-                                              color: Colors.blue,
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                            children: [
-                                              TextSpan(
-                                                text:
-                                                    categoryEvent[index].venue,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 11,
-                                                ),
-                                              )
-                                            ],
+                                          SizedBox(
+                                            height: 4,
                                           ),
-                                        ),
-                                        Text.rich(
-                                          TextSpan(
-                                            text: 'Time : ',
-                                            style: GoogleFonts.dmSans(
-                                              color: Colors.blue,
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w600,
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'Venue : ',
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.blue,
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              children: [
+                                                TextSpan(
+                                                  text: categoryEvent[index]
+                                                      .venue,
+                                                  style: GoogleFonts.dmSans(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 11,
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            children: [
-                                              TextSpan(
-                                                text: DateFormat.jm().format(
-                                                    DateTime.parse(
-                                                        categoryEvent[index]
-                                                            .starttime)),
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 11,
-                                                ),
-                                              )
-                                            ],
                                           ),
-                                        ),
-                                        Text.rich(
-                                          TextSpan(
-                                            text: 'Speaker : ',
-                                            style: GoogleFonts.dmSans(
-                                              color: Colors.blue,
-                                              fontSize: 11,
-                                              fontWeight: FontWeight.w600,
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'Time : ',
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.blue,
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              children: [
+                                                TextSpan(
+                                                  text: DateFormat.jm().format(
+                                                      DateTime.parse(
+                                                          categoryEvent[index]
+                                                              .starttime)),
+                                                  style: GoogleFonts.dmSans(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 11,
+                                                  ),
+                                                )
+                                              ],
                                             ),
-                                            children: [
-                                              TextSpan(
-                                                text: categoryEvent[index]
-                                                    .speaker,
-                                                style: GoogleFonts.dmSans(
-                                                  color: Colors.black,
-                                                  fontWeight: FontWeight.w600,
-                                                  fontSize: 11,
-                                                ),
-                                              )
-                                            ],
                                           ),
-                                        ),
-                                      ],
+                                          Text.rich(
+                                            TextSpan(
+                                              text: 'Speaker : ',
+                                              style: GoogleFonts.dmSans(
+                                                color: Colors.blue,
+                                                fontSize: 11,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                              children: [
+                                                TextSpan(
+                                                  text: categoryEvent[index]
+                                                      .speaker,
+                                                  style: GoogleFonts.dmSans(
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w600,
+                                                    fontSize: 11,
+                                                  ),
+                                                )
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ],
                                 ),

@@ -64,7 +64,7 @@ class ScrollingCardWidget extends StatelessWidget {
                   big: big,
                   title: ongoingEvents[index].eventname,
                   venue: ongoingEvents[index].venue,
-                  imgUrl: state.data[index].posterurl),
+                  imgUrl: ongoingEvents[index].posterurl),
             ),
             separatorBuilder: (ctx, index) => const SizedBox(
               width: 20,
