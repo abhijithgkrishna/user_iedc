@@ -139,7 +139,7 @@ class _EventListState extends State<EventList> {
                                           children: [
                                             TextSpan(
                                               text:
-                                                  '${DateFormat.jm().format(DateTime.parse(state.data[index].starttime))} - ${DateFormat.jm().format(DateTime.parse(state.data[index].endtime))}',
+                                                  '${DateFormat.jm().format(DateTime.parse(state.data[index].starttime).add(Duration(hours: 5, minutes: 30)))} - ${DateFormat.jm().format(DateTime.parse(state.data[index].endtime).add(Duration(hours: 5, minutes: 30)))}',
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,

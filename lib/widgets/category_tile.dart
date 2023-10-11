@@ -22,7 +22,7 @@ class CategoryScrollWidget extends StatelessWidget {
         child: SizedBox(
           height: 35,
           child: ListView.separated(
-            padding: EdgeInsets.only(bottom: 2),
+            padding: EdgeInsets.only(bottom: 2, left: 8),
             scrollDirection: Axis.horizontal,
             itemBuilder: (context, index) => InkWell(
               onTap: () {
