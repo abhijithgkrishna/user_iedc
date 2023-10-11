@@ -103,26 +103,6 @@ class PopUp extends StatelessWidget {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 8),
-                        child: Text.rich(
-                          TextSpan(
-                              text: 'Status : ',
-                              style: GoogleFonts.dmSans(
-                                  color: Colors.black54,
-                                  fontWeight: FontWeight.w600),
-                              children: [
-                                TextSpan(
-                                  text: event.status,
-                                  style: GoogleFonts.dmSans(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.w600,
-                                    fontSize: 15,
-                                  ),
-                                )
-                              ]),
-                        ),
-                      ),
-                      Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: Text.rich(
                           TextSpan(
