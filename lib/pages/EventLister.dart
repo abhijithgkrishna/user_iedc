@@ -117,7 +117,8 @@ class _EventListState extends State<EventList> {
                                           children: [
                                             TextSpan(
                                               text: state.data[index].venue
-                                                  .substring(0, 9),
+                                                      .substring(0, 9) +
+                                                  '..',
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,
@@ -159,7 +160,8 @@ class _EventListState extends State<EventList> {
                                           children: [
                                             TextSpan(
                                               text: state.data[index].speaker
-                                                  .substring(0, 10),
+                                                      .substring(0, 10) +
+                                                  '..',
                                               style: GoogleFonts.dmSans(
                                                 color: Colors.black,
                                                 fontWeight: FontWeight.w600,

@@ -108,7 +108,11 @@ class VenueWidget extends StatelessWidget {
                   padding: const EdgeInsets.all(8.0),
                   child: SvgPicture.asset('assets/pin.svg'),
                 ),
-                Text(location),
+                Text(
+                  location.length > 12
+                      ? location.substring(0, 12) + '..'
+                      : location,
+                ),
               ],
             ),
           ),
