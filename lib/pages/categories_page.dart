@@ -1,17 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:user_iedc/utils/category_list.dart';
+import 'package:user_iedc/home_bloc/home_bloc.dart';
 
 import '../widgets/event-categories.dart';
 
 class CategoriesPage extends StatelessWidget {
   CategoriesPage({super.key});
 
-  final List categories = Categories;
   @override
   Widget build(BuildContext context) {
+    List venue;
     return Scaffold(
       backgroundColor: Color(0xfff9f9f9),
       body: SafeArea(
@@ -50,15 +51,14 @@ class CategoriesPage extends StatelessWidget {
               const SizedBox(
                 height: 15,
               ),
-              StaggeredGrid.count(
-                crossAxisCount: 2,
-                children: [
-                  VenueWidget(location: 'DJ Hall'),
-                  VenueWidget(location: 'CETAA Hall'),
-                  VenueWidget(location: 'EC Seminar Hall'),
-                  VenueWidget(location: 'Sargam Stage'),
-                ],
-              )
+              BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+                venue = state.venues;
+                return StaggeredGrid.count(
+                  crossAxisCount: 2,
+                  children: List.generate(venue.length,
+                      (index) => VenueWidget(location: venue[index])),
+                );
+              })
             ],
           ),
         ),
@@ -125,59 +125,65 @@ class CategoryGridWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final List categories = Categories;
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: GridView.count(
-        shrinkWrap: true,
-        crossAxisCount: 3,
-        mainAxisSpacing: 20,
-        crossAxisSpacing: 30,
-        children: List.generate(
-          categories.length,
-          (index) => InkWell(
-            onTap: () {
-              showDialog(
-                  context: context,
-                  builder: (context) => Dialog(
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(28)),
-                        child: CategoriesEvent(
-                            categoryname: categories[index], isCategory: true),
-                      ));
-            },
-            child: Container(
-              height: 110,
-              width: 96,
-              decoration: BoxDecoration(
-                  color: Color(0xff2763FF),
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
-                    BoxShadow(
-                        color: const Color.fromARGB(68, 0, 0, 0),
-                        offset: Offset(0, 0.5),
-                        blurRadius: 4)
-                  ]),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: SvgPicture.asset('assets/gear1.svg'),
-                  ),
-                  Text(
-                    categories[index],
-                    style: GoogleFonts.dmSans(
-                        fontSize: 13,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.white),
-                  ),
-                ],
+    List categories;
+    return BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
+      categories = state.categories;
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: GridView.count(
+          shrinkWrap: true,
+          crossAxisCount: 3,
+          mainAxisSpacing: 20,
+          crossAxisSpacing: 30,
+          children: List.generate(
+            categories.length,
+            (index) => InkWell(
+              onTap: () {
+                showDialog(
+                    context: context,
+                    builder: (context) => Dialog(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(28)),
+                          child: CategoriesEvent(
+                              categoryname: categories[index],
+                              isCategory: true),
+                        ));
+              },
+              child: Container(
+                height: 110,
+                width: 96,
+                decoration: BoxDecoration(
+                    color: Color(0xff2763FF),
+                    borderRadius: BorderRadius.circular(20),
+                    boxShadow: [
+                      BoxShadow(
+                          color: const Color.fromARGB(68, 0, 0, 0),
+                          offset: Offset(0, 0.5),
+                          blurRadius: 4)
+                    ]),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: SvgPicture.asset('assets/gear1.svg'),
+                    ),
+                    Text(
+                      categories[index].length <= 12
+                          ? categories[index]
+                          : categories[index].substring(0, 12) + '...',
+                      style: GoogleFonts.dmSans(
+                          fontSize: 13,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 }

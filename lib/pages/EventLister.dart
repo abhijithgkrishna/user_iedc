@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sanity_image_url/flutter_sanity_image_url.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 import '../home_bloc/home_bloc.dart';
+import '../sanity/sanity_config.dart';
 
 class EventList extends StatefulWidget {
   const EventList({super.key});
@@ -14,9 +17,6 @@ class EventList extends StatefulWidget {
 class _EventListState extends State<EventList> {
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<HomeBloc>(context).add(const HomeEvent.fetchData());
-    });
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -61,9 +61,12 @@ class _EventListState extends State<EventList> {
                                 child: SizedBox(
                                   height: 100,
                                   width: 100,
-                                  child: Image.asset(
-                                    "assets/image1.png",
-                                    fit: BoxFit.cover,
+                                  child: Image.network(
+                                    urlFor(SanityImage.fromJson(
+                                            state.data[index].posterurl))
+                                        .size(300, 300)
+                                        .url(),
+                                    fit: BoxFit.fill,
                                   ),
                                 ),
                               ),
@@ -116,7 +119,8 @@ class _EventListState extends State<EventList> {
                                       ),
                                       children: [
                                         TextSpan(
-                                          text: '9:00 AM - 10:00 AM',
+                                          text:
+                                              '${DateFormat.jm().format(DateTime.parse(state.data[index].starttime))} - ${DateFormat.jm().format(DateTime.parse(state.data[index].endtime))}',
                                           style: GoogleFonts.dmSans(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w600,
@@ -128,7 +132,7 @@ class _EventListState extends State<EventList> {
                                   ),
                                   Text.rich(
                                     TextSpan(
-                                      text: 'Status : ',
+                                      text: 'Speaker : ',
                                       style: GoogleFonts.dmSans(
                                         color: Colors.blue,
                                         fontSize: 15,
@@ -136,7 +140,7 @@ class _EventListState extends State<EventList> {
                                       ),
                                       children: [
                                         TextSpan(
-                                          text: 'Ongoing',
+                                          text: state.data[index].speaker,
                                           style: GoogleFonts.dmSans(
                                             color: Colors.black,
                                             fontWeight: FontWeight.w600,

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_sanity_image_url/flutter_sanity_image_url.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:user_iedc/models/eventmodel/events.dart';
 import '../home_bloc/home_bloc.dart';
+import '../sanity/sanity_config.dart';
 
 class PopUp extends StatelessWidget {
   final Events event;
@@ -11,10 +14,6 @@ class PopUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      BlocProvider.of<HomeBloc>(context).add(const HomeEvent.fetchData());
-    });
-
     return SingleChildScrollView(
       child: BlocBuilder<HomeBloc, HomeState>(builder: (context, state) {
         return Card(
@@ -33,9 +32,11 @@ class PopUp extends StatelessWidget {
                     child: SizedBox(
                       height: 180,
                       width: 250,
-                      child: Image.asset(
-                        "assets/image1.png",
-                        fit: BoxFit.cover,
+                      child: Image.network(
+                        urlFor(SanityImage.fromJson(event.posterurl))
+                            .size(300, 300)
+                            .url(),
+                        fit: BoxFit.fill,
                       ),
                     ),
                   ), //CircleAvatar
@@ -90,7 +91,8 @@ class PopUp extends StatelessWidget {
                                   fontWeight: FontWeight.w600),
                               children: [
                                 TextSpan(
-                                  text: event.starttime,
+                                  text: DateFormat.jm()
+                                      .format(DateTime.parse(event.starttime)),
                                   style: GoogleFonts.dmSans(
                                     color: Colors.black,
                                     fontWeight: FontWeight.w600,
@@ -149,7 +151,7 @@ class PopUp extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.only(left: 8),
                     child: Text(
-                      'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry ',
+                      event.description,
                       style: GoogleFonts.dmSans(fontWeight: FontWeight.w500),
                     ),
                   ),

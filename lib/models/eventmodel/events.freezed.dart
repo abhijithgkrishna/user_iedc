@@ -38,6 +38,8 @@ mixin _$Events {
   String get venue => throw _privateConstructorUsedError;
   @JsonKey(name: "posterurl")
   Map<String, dynamic> get posterurl => throw _privateConstructorUsedError;
+  @JsonKey(name: "description")
+  String get description => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,7 +60,8 @@ abstract class $EventsCopyWith<$Res> {
       @JsonKey(name: "status") String status,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "venue") String venue,
-      @JsonKey(name: "posterurl") Map<String, dynamic> posterurl});
+      @JsonKey(name: "posterurl") Map<String, dynamic> posterurl,
+      @JsonKey(name: "description") String description});
 }
 
 /// @nodoc
@@ -83,6 +86,7 @@ class _$EventsCopyWithImpl<$Res, $Val extends Events>
     Object? category = null,
     Object? venue = null,
     Object? posterurl = null,
+    Object? description = null,
   }) {
     return _then(_value.copyWith(
       id: null == id
@@ -121,6 +125,10 @@ class _$EventsCopyWithImpl<$Res, $Val extends Events>
           ? _value.posterurl
           : posterurl // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
     ) as $Val);
   }
 }
@@ -141,7 +149,8 @@ abstract class _$$EventsImplCopyWith<$Res> implements $EventsCopyWith<$Res> {
       @JsonKey(name: "status") String status,
       @JsonKey(name: "category") String category,
       @JsonKey(name: "venue") String venue,
-      @JsonKey(name: "posterurl") Map<String, dynamic> posterurl});
+      @JsonKey(name: "posterurl") Map<String, dynamic> posterurl,
+      @JsonKey(name: "description") String description});
 }
 
 /// @nodoc
@@ -164,6 +173,7 @@ class __$$EventsImplCopyWithImpl<$Res>
     Object? category = null,
     Object? venue = null,
     Object? posterurl = null,
+    Object? description = null,
   }) {
     return _then(_$EventsImpl(
       id: null == id
@@ -202,6 +212,10 @@ class __$$EventsImplCopyWithImpl<$Res>
           ? _value._posterurl
           : posterurl // ignore: cast_nullable_to_non_nullable
               as Map<String, dynamic>,
+      description: null == description
+          ? _value.description
+          : description // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -218,8 +232,8 @@ class _$EventsImpl implements _Events {
       @JsonKey(name: "status") required this.status,
       @JsonKey(name: "category") required this.category,
       @JsonKey(name: "venue") required this.venue,
-      @JsonKey(name: "posterurl")
-      required final Map<String, dynamic> posterurl})
+      @JsonKey(name: "posterurl") required final Map<String, dynamic> posterurl,
+      @JsonKey(name: "description") required this.description})
       : _posterurl = posterurl;
 
   factory _$EventsImpl.fromJson(Map<String, dynamic> json) =>
@@ -259,8 +273,12 @@ class _$EventsImpl implements _Events {
   }
 
   @override
+  @JsonKey(name: "description")
+  final String description;
+
+  @override
   String toString() {
-    return 'Events(id: $id, eventname: $eventname, starttime: $starttime, endtime: $endtime, speaker: $speaker, status: $status, category: $category, venue: $venue, posterurl: $posterurl)';
+    return 'Events(id: $id, eventname: $eventname, starttime: $starttime, endtime: $endtime, speaker: $speaker, status: $status, category: $category, venue: $venue, posterurl: $posterurl, description: $description)';
   }
 
   @override
@@ -280,7 +298,9 @@ class _$EventsImpl implements _Events {
                 other.category == category) &&
             (identical(other.venue, venue) || other.venue == venue) &&
             const DeepCollectionEquality()
-                .equals(other._posterurl, _posterurl));
+                .equals(other._posterurl, _posterurl) &&
+            (identical(other.description, description) ||
+                other.description == description));
   }
 
   @JsonKey(ignore: true)
@@ -295,7 +315,8 @@ class _$EventsImpl implements _Events {
       status,
       category,
       venue,
-      const DeepCollectionEquality().hash(_posterurl));
+      const DeepCollectionEquality().hash(_posterurl),
+      description);
 
   @JsonKey(ignore: true)
   @override
@@ -321,8 +342,9 @@ abstract class _Events implements Events {
       @JsonKey(name: "status") required final String status,
       @JsonKey(name: "category") required final String category,
       @JsonKey(name: "venue") required final String venue,
-      @JsonKey(name: "posterurl")
-      required final Map<String, dynamic> posterurl}) = _$EventsImpl;
+      @JsonKey(name: "posterurl") required final Map<String, dynamic> posterurl,
+      @JsonKey(name: "description")
+      required final String description}) = _$EventsImpl;
 
   factory _Events.fromJson(Map<String, dynamic> json) = _$EventsImpl.fromJson;
 
@@ -353,6 +375,9 @@ abstract class _Events implements Events {
   @override
   @JsonKey(name: "posterurl")
   Map<String, dynamic> get posterurl;
+  @override
+  @JsonKey(name: "description")
+  String get description;
   @override
   @JsonKey(ignore: true)
   _$$EventsImplCopyWith<_$EventsImpl> get copyWith =>

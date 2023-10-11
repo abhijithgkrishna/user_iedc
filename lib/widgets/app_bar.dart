@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:user_iedc/widgets/profile._card.dart';
 
 class AppBarWidget extends StatelessWidget {
   const AppBarWidget({
     super.key,
-    
   });
 
   @override
@@ -59,7 +59,7 @@ class AppBarWidget extends StatelessWidget {
                                 child: ProfileCard(),
                               ));
                     },
-                    icon: Icon(Icons.person_2),
+                    icon: SvgPicture.asset('assets/avatar.svg'),
                   ),
                 )
               ],
