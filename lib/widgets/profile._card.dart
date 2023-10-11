@@ -71,13 +71,13 @@ class _ProfileCardState extends State<ProfileCard> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Card(
-        elevation: 50,
+        elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
         shadowColor: Colors.white,
         color: Color.fromARGB(255, 255, 255, 255),
         child: SizedBox(
           child: Padding(
-            padding: const EdgeInsets.all(24.0),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Column(
               children: [
                 Container(
@@ -112,87 +112,87 @@ class _ProfileCardState extends State<ProfileCard> {
                         ),
                       ),
                       const SizedBox(height: 10),
-                       const SizedBox(
-                  height: 10,
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                //SizedBox
-                Text(
-                  name,
-                  style: GoogleFonts.dmSans(
-                      color: Color.fromARGB(255, 0, 0, 0),
-                      fontWeight: FontWeight.w500,
-                      fontSize: 21), //Textstyle
-                ),
-                const SizedBox(
-                  height: 40,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 0),
-                      child: Text.rich(
-                        TextSpan(
-                            text: 'Phone Number : ',
-                            style: GoogleFonts.dmSans(
-                                color: Colors.black54,
-                                fontWeight: FontWeight.w800),
-                            children: [
-                              TextSpan(
-                                text: phoneNumber,
-                                style: GoogleFonts.dmSans(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ]),
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 0, top: 15),
-                      child: Text.rich(
-                        TextSpan(
-                            text: 'Booking ID : ',
-                            style: GoogleFonts.dmSans(
-                                color: const Color.fromARGB(137, 8, 8, 8),
-                                fontWeight: FontWeight.w800),
-                            children: [
-                              TextSpan(
-                                text: bookingId,
-                                style: GoogleFonts.dmSans(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ]),
+                      const SizedBox(
+                        height: 10,
                       ),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                TextButton(
-                    onPressed: () async {
-                      SharedPreferences pref =
-                          await SharedPreferences.getInstance();
-                      pref.remove("bookingId");
-                      Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => IdEnteringPage()),
-                        (route) =>
-                            false, // This prevents going back to the previous route
-                      );
-                    },
-                    child: Text('Logout'))
-                //Text
+                      //SizedBox
+                      Text(
+                        name,
+                        style: GoogleFonts.dmSans(
+                            color: Color.fromARGB(255, 0, 0, 0),
+                            fontWeight: FontWeight.w500,
+                            fontSize: 21), //Textstyle
+                      ),
+                      const SizedBox(
+                        height: 40,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0),
+                            child: Text.rich(
+                              TextSpan(
+                                  text: 'Phone Number : ',
+                                  style: GoogleFonts.dmSans(
+                                      color: Colors.black54,
+                                      fontWeight: FontWeight.w800),
+                                  children: [
+                                    TextSpan(
+                                      text: phoneNumber,
+                                      style: GoogleFonts.dmSans(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 0, top: 15),
+                            child: Text.rich(
+                              TextSpan(
+                                  text: 'Booking ID : ',
+                                  style: GoogleFonts.dmSans(
+                                      color: const Color.fromARGB(137, 8, 8, 8),
+                                      fontWeight: FontWeight.w800),
+                                  children: [
+                                    TextSpan(
+                                      text: bookingId,
+                                      style: GoogleFonts.dmSans(
+                                        color: Colors.black,
+                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                      ),
+                                    ),
+                                  ]),
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      TextButton(
+                          onPressed: () async {
+                            SharedPreferences pref =
+                                await SharedPreferences.getInstance();
+                            pref.remove("bookingId");
+                            Navigator.pushAndRemoveUntil(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => IdEnteringPage()),
+                              (route) =>
+                                  false, // This prevents going back to the previous route
+                            );
+                          },
+                          child: Text('Logout'))
+                      //Text
                       // ... Rest of your code to display the profile details
                       // (name, phoneNumber, etc.)
                     ],

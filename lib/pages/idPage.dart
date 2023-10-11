@@ -8,13 +8,15 @@ import 'package:user_iedc/widgets/profile._card.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-
 class IdEnteringPage extends StatefulWidget {
-  IdEnteringPage({super.key,});
+  IdEnteringPage({
+    super.key,
+  });
 
   @override
   State<IdEnteringPage> createState() => _IdEnteringPageState();
 }
+
 class _IdEnteringPageState extends State<IdEnteringPage> {
   final bookingIDController = TextEditingController();
   String mobile = '';
@@ -23,7 +25,7 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
 
   Future<void> firebaseChecking() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    pref.setString("bookingId",bookingIDController.text);
+    pref.setString("bookingId", bookingIDController.text);
     setState(() {
       isLoading = true;
     });
@@ -80,24 +82,12 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
                   Center(
                     child: Padding(
                       padding: const EdgeInsets.all(15.0),
-                      child: Text.rich(
-                        TextSpan(
-                          text: "Enter Your Booking ID",
-                          style: GoogleFonts.dmSans(
-                            color: Colors.black,
-                            fontWeight: FontWeight.w500,
-                            fontSize: 21,
-                          ),
-                          children: [
-                            TextSpan(
-                              text: "",
-                              style: GoogleFonts.dmSans(
-                                color: const Color(0xFF2057E3),
-                                fontWeight: FontWeight.w400,
-                                fontSize: 21,
-                              ),
-                            )
-                          ],
+                      child: Text(
+                        "Enter Your Booking ID",
+                        style: GoogleFonts.dmSans(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 21,
                         ),
                       ),
                     ),
@@ -111,6 +101,12 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
                     child: TextFormField(
                       controller: bookingIDController,
                       decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(10),
+                          borderSide: BorderSide(
+                            color: Colors.grey,
+                          ),
+                        ),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
                           borderSide: BorderSide(
@@ -127,16 +123,15 @@ class _IdEnteringPageState extends State<IdEnteringPage> {
                     height: 15,
                   ),
                   ElevatedButton(
-                    style:ElevatedButton.styleFrom(
-                      backgroundColor: Color.fromARGB(31, 237, 233, 233)
-                    ),
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Color.fromARGB(255, 48, 101, 235)),
                     onPressed: isLoading ? null : firebaseChecking,
-                    child:Text('Login',style: TextStyle(color: Colors.black87),),
-                    
+                    child: Text(
+                      'Login',
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  isLoading
-                        ? CircularProgressIndicator()
-                        : SizedBox()
+                  isLoading ? CircularProgressIndicator() : SizedBox()
                 ],
               ),
             ),
