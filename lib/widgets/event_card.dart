@@ -102,7 +102,9 @@ class EventCard extends StatelessWidget {
                       ),
                       children: [
                         TextSpan(
-                          text: venue,
+                          text: venue.length > 13
+                              ? venue.substring(0, 12) + '..'
+                              : venue,
                           style: GoogleFonts.dmSans(
                             color: Colors.black,
                             fontWeight: FontWeight.w500,
