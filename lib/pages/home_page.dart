@@ -43,7 +43,6 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 showDialog(
                   context: context,
-                  barrierDismissible: false,
                   builder: (context) => Dialog(
                     elevation: 50,
                     shape: RoundedRectangleBorder(
